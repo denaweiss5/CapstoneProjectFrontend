@@ -2,37 +2,110 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: grey;
+  /* background-image: url('./images/yellowBG.jpg'); */
+  background-color: antiquewhite;
+  background-position: center;
+  background-size: cover;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: grayscale;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#sidebar {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  min-width: 180px;
+  height: 100%;
+  background-color: white;
+  opacity: 90%;
+  padding-top: 50px;
 }
+
+.menuitem {
+  padding: 10px 20px;
+  line-height: 20px;
+  color: black;
+  border-radius: 0 !important;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: medium;
+}
+.menuitem:hover{
+  color:antiquewhite;
+}
+#activebtn{
+  background-color: antiquewhite;
+  color: black;
+  border: none !important;
+}
+
+#activebtn:hover{
+  background-color: bisque;
+}
+
+#menuitem{
+  color: black;
+}
+
+#menuitem:hover{
+  background-color: antiquewhite;
+}
+
+.loginform{
+  justify-content: left;
+  text-align: center;
+  min-height: 380px;
+  min-width: 400px;
+  padding: 50px;
+  background-color: white;
+  opacity: 80%;
+  color: black;
+ 
+}
+
+.registerform{
+  justify-content: left;
+  text-align: center;
+  min-height: 380px;
+  min-width: 400px;
+  padding: 50px;
+  background-color: white;
+  opacity: 80%;
+  color: black;
+}
+
+.account-details{
+  /* border: 5px ridge burlywood;
+  border-width: thick; */ 
+  margin-left: 10px;
+  text-align: left;
+  display: block;
+}
+
+
+
+.account-details h1 {
+top: 56px;
+position: fixed;
+}
+
+.account-details h2 {
+  margin: 10px;
+  border: 2px solid gray;
+  background-color: white;
+  border-width: thin;
+  width: 200px;
+  font-size: 17px;
+}
+
