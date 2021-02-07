@@ -9,9 +9,9 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: grey;
+  color: white;
   /* background-image: url('./images/yellowBG.jpg'); */
-  background-color: antiquewhite;
+  background: linear-gradient(to right, rgb(202, 49, 49) , rgb(47, 47, 209) );
   background-position: center;
   background-size: cover;
 }
@@ -22,14 +22,15 @@ body {
 }
 
 #sidebar {
-  position: absolute; 
+  position: fixed; 
   top: 0;
   left: 0;
-  min-width: 180px;
+  max-width: 170px;
   height: 100%;
   background-color: white;
   opacity: 90%;
   padding-top: 50px;
+ 
 }
 
 .menuitem {
@@ -42,16 +43,18 @@ body {
   font-size: medium;
 }
 .menuitem:hover{
-  color:antiquewhite;
+  transform: scale(1.1);
 }
 #activebtn{
-  background-color: antiquewhite;
+  
   color: black;
   border: none !important;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 #activebtn:hover{
-  background-color: bisque;
+  transform: scale(1.1);
 }
 
 #menuitem{
@@ -59,7 +62,7 @@ body {
 }
 
 #menuitem:hover{
-  background-color: antiquewhite;
+  transform: scale(1.1);
 }
 
 .loginform{
@@ -86,8 +89,7 @@ body {
 }
 
 .account-details{
-  /* border: 5px ridge burlywood;
-  border-width: thick; */ 
+  
   margin-left: 10px;
   text-align: left;
   display: block;
@@ -109,3 +111,13 @@ position: fixed;
   font-size: 17px;
 }
 
+.homebtns:hover {
+  transform: scale(1.1);
+
+}
+
+.recipesgrid {
+  width: 850px;
+  height: 550px;
+  
+}

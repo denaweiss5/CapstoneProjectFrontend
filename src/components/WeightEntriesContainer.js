@@ -87,22 +87,19 @@ class WeightEntriesContainer extends React.Component {
     }
 
 
-
-
-
     render(){
 
         return (
             <div>
-            <h1 style={{paddingTop:'20px', paddingBottom: '20px', marginLeft: '20%'}}>My weight Journey</h1>
+            <h1 style={{paddingTop:'20px', paddingBottom: '20px', marginLeft: '20%'}}>My Weight Journey</h1>
             <div >
               
-                <table className="ui blue table" style={{
+                <table className="ui table" style={{
                     maxWidth: '600px',
                     marginLeft: '10%'
                 }}>
                     <thead >
-                    <tr>
+                    <tr >
                         <th >Date</th>
                         <th >Weight</th>
                     </tr>
@@ -120,16 +117,15 @@ class WeightEntriesContainer extends React.Component {
                             return <WeightEntry entry={entry} key={entry.id}/>
                         })}
                         </div>
-                    <table className="ui blue table" style={{
+                    <table className="ui table" style={{
                     maxWidth: '600px',
                     marginLeft: '10%'
                     }}>
                             <thead>
                                 <tr style={{ paddingLeft: '100px'}}>
                                     {this.state.addWeight ? 
-                                    <button onClick={() => this.toggleAddWeight()}  className="ui button" style={{margin: '20px', textAlign: 'center'}}>Add weight</button>
+                                    <Button onClick={() => this.toggleAddWeight()}  className="ui button" style={{margin: '20px', textAlign: 'center'}}>Add weight</Button>
                                     :
-                                    
                                     <td>
                                         <Form >
                      
@@ -146,7 +142,7 @@ class WeightEntriesContainer extends React.Component {
                         
                                     <th style={{
                                         paddingRight: '200px'
-                                    }} id='total-weight'>{this.renderTotal()}</th>
+                                    }} id='total-weight'>{this.renderTotal()} lbs</th>
                                 </tr>
                             </thead>
                     </table>

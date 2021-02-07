@@ -19,58 +19,54 @@ class HomePage extends React.Component {
             <div>
                 <Container text >
                 <Link to ='/myWeightJourney'>
-                <Button  color='blue'
+                <Button className='homebtns' color='white'
                   style={{
                     marginLeft: '50px',
                     marginRight: '15px',
                     marginBottom: '15px',
                     minHeight: '150px',
                     minWidth: '250px',
-                    fontSize: '20px',
-                    borderRadius: '15px'
+                    fontSize: '30px'
                 }}
                 >
                     My Weight Journey
                 </Button>
                 </Link>
                 <Link to ='/myDiaries'>
-                <Button  color='yellow'
+                <Button className='homebtns' color='white'
                   style={{
                     marginLeft: '15px',
                     marginBottom: '15px',
                     minHeight: '150px',
                     minWidth: '250px',
-                    fontSize: '20px',
-                    borderRadius: '15px'
+                    fontSize: '30px'
                 }}
                 >
                     My Diary
                 </Button>
                 </Link>
                 <Link to ='/myHabits'>
-                <Button  color='green'
+                <Button className='homebtns' color='white'
                   style={{
                     marginLeft: '50px',
                     marginRight: '15px',
                     marginTop: '15px',
                     minHeight: '150px',
                     minWidth: '250px',
-                    fontSize: '20px',
-                    borderRadius: '15px'
+                    fontSize: '30px'
                 }}
                 >
                     My Habits
                 </Button>
                 </Link>
-                <Link to ='/recipes'>
-                <Button  color='red'
+                <Link to ='/find_recipes'>
+                <Button className='homebtns' color='white'
                 style={{
                 marginLeft: '15px',
                 marginTop: '15px',
                 minHeight: '150px',
                 minWidth: '250px',
-                fontSize: '20px',
-                borderRadius: '15px'
+                fontSize: '30px'
                  }}
                 >
                     Recipes

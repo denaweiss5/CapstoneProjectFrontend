@@ -19,7 +19,7 @@ class LandingPage extends React.Component{
                     fontWeight: 'bold',
                     marginBottom: 0,
                     marginTop: 0,
-                    color: 'grey'
+                    color: 'white'
                 }}
                 />
                 <Header
@@ -30,12 +30,12 @@ class LandingPage extends React.Component{
                     fontSize:  '1.7em',
                     fontWeight: 'normal',
                     marginTop:  '1.5em',
-                    color: 'grey'
+                    color: 'white'
                 }}
                 />
                 <br></br>
                 <Link to='/login'>
-                 <Button  color='grey' size='huge' 
+                 <Button  color='white' size='huge' 
                    style={{
                     marginRight: '20px'
                 }}
@@ -44,7 +44,7 @@ class LandingPage extends React.Component{
                 </Button>
                 </Link>
                 <Link to='/register'>
-                <Button  color='grey' size='huge' 
+                <Button  color='white' size='huge' 
                  style={{
                     marginLeft: '20px'
                 }}

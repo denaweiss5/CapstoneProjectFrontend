@@ -15,10 +15,7 @@ class LoginForm extends React.Component {
         }
     }
 
-componentDidMount(){
-    if(!this.props.currentUser){
-    }
-}
+
 
   handleChange = (e) => {
       this.setState({

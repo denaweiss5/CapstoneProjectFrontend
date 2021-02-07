@@ -11,6 +11,7 @@ class Navbar extends React.Component{
 
     handleSignOut = () => {
         this.props.logoutUser()
+
     }
 
     render(){
@@ -33,6 +34,10 @@ class Navbar extends React.Component{
               </Link>
               <Divider hidden />
               <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
               <Link to='/myWeightJourney'>
               <Menu.Item className='menuitem' id='menuitem' as="a">My Weight Journey</Menu.Item>
               </Link>
@@ -42,14 +47,19 @@ class Navbar extends React.Component{
               <Link to='/myHabits'>
               <Menu.Item className='menuitem' id='menuitem' as="a">My Habits</Menu.Item>
               </Link>
-              <Link to='/recipes'>
+              <Link to='/find_recipes'>
               <Menu.Item className='menuitem' id='menuitem' as="a">Recipes</Menu.Item>
               </Link>
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
+              <Divider hidden />
               <Divider hidden />
               <Link to='/account_info'>
               <Menu.Item className='menuitem' id='menuitem'  as="a">Account Info</Menu.Item>
               </Link>
-              <Divider hidden />
               <Menu.Item onClick={this.handleSignOut} className='menuitem' id='menuitem' as="a">Sign Out</Menu.Item>
                 
             </Menu>
