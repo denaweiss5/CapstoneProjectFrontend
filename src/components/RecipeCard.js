@@ -1,8 +1,18 @@
 import React from "react";
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Button, Card, Icon, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 class RecipeCard extends React.Component {
+
+    constructor(){
+        super()
+        this.state = {
+            calories: '',
+            carbs: '',
+            fat: '',
+            protein: ''
+        }
+    }
   renderNutrition = (id) => {
     fetch(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionWidget.json`,
@@ -17,8 +27,13 @@ class RecipeCard extends React.Component {
       }
     )
     .then(resp => resp.json())
-    .then( data => {
-        console.log(data)
+    .then(nutritionInfo => {
+        this.setState({
+            calories: nutritionInfo.calories,
+            carbs: nutritionInfo.carbs,
+            fat: nutritionInfo.fat,
+            protein: nutritionInfo.protein
+        })
     })
   };
   render() {
@@ -32,38 +47,28 @@ class RecipeCard extends React.Component {
       readyInMinutes,
     } = this.props.recipe;
 
+
     return (
       <div
-        style={{
-          marginLeft: "180px",
-        }}
       >
         <div class="ui container">
-          <div class="ui padded grid">
-            <div class="fifteen wide column">
-              <p>{title}</p>
+          <div class="ui grid">
+            <div class="thirteen wide column">
+                <Button  onClick={()=>this.props.history.goBack()} style={{marginTop: '50px', float: 'left'}}>Back</Button>
+              <p>{title} </p>
+              
               <Image
                 src={image}
                 style={{
-                  display: "block",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  width: "50%",
+                  display: 'block',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  width: '50%',
                 }}
               />
-              <h2
-                style={{
-                  border: "1px solid red",
-                  padding: "10px",
-                  marginRight: "200px",
-                  marginLeft: "200px",
-                  backgroundColor: "white",
-                  color: "black",
-                  float: "right",
-                }}
-              >
-                <p>Total Time: {readyInMinutes} min</p>
-                <p>Servings: {servings}</p>
+              <h2 style={{border: '2px solid red', float: 'right', width: '220px', backgroundColor: 'white', color: 'black'}}>
+            <p>Total Time: {readyInMinutes} min</p>
+            <p>servings: {servings}</p>
               </h2>
             </div>
 
@@ -95,6 +100,10 @@ class RecipeCard extends React.Component {
                 <div class="column">
                   <h1 class="ui header">Nutrion Facts</h1>
                   <p>{this.renderNutrition(id)}</p>
+                    <h3>Calories: {this.state.calories}</h3>
+                    <h3>Carbs: {this.state.carbs}</h3>
+                    <h3>Fat: {this.state.fat}</h3>
+                    <h3>Protein: {this.state.protein}</h3>
                 </div>
               </div>
             </div>

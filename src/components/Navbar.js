@@ -4,6 +4,18 @@ import { Divider, Grid, Menu } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logoutUser } from '../actions/auth'
+import "semantic-ui-css/semantic.min.css";
+
+import {
+  Button,
+  Container,
+  Dropdown,
+
+  Header,
+  Icon,
+
+  Message
+} from "semantic-ui-react";
 
 
 
@@ -16,58 +28,54 @@ class Navbar extends React.Component{
 
     render(){
         return(
-     
-        <div>
-        { this.props.currentUser ? 
-       <Grid padded>
-          <Grid.Column
-            tablet={3}
-            computer={3}
-            only="tablet computer"
-            id="sidebar"
-          >
-            <Menu vertical borderless fluid text>
-             <Link to='/home'>
-              <Menu.Item className='menuitem' id='activebtn' active as="a">
-                HOME
+
+<div className="App">
+  { this.props.currentUser ? 
+        <Grid padded className="tablet computer only">
+          <Menu borderless fluid fixed="top" size="huge">
+            <Container>
+            <Menu.Item as="a" >Healthy Habits</Menu.Item>
+            <Link to='/home'>
+              <Menu.Item active as="a" >
+                Home
               </Menu.Item>
               </Link>
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
               <Link to='/myWeightJourney'>
-              <Menu.Item className='menuitem' id='menuitem' as="a">My Weight Journey</Menu.Item>
+              <Menu.Item as="a" >My Weight Journey</Menu.Item>
               </Link>
               <Link to='/myDiaries'>
-              <Menu.Item className='menuitem' id='menuitem' as="a">My Diaries</Menu.Item>
+              <Menu.Item as="a">My Diaries</Menu.Item>
               </Link>
               <Link to='/myHabits'>
-              <Menu.Item className='menuitem' id='menuitem' as="a">My Habits</Menu.Item>
+              <Menu.Item as="a">My Habits</Menu.Item>
               </Link>
+              <Menu.Menu position="right">
               <Link to='/recipes'>
-              <Menu.Item className='menuitem' id='menuitem' as="a">Recipes</Menu.Item>
-              </Link>
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Divider hidden />
-              <Link to='/account_info'>
-              <Menu.Item className='menuitem' id='menuitem'  as="a">Account Info</Menu.Item>
-              </Link>
-              <Menu.Item onClick={this.handleSignOut} className='menuitem' id='menuitem' as="a">Sign Out</Menu.Item>
-                
-            </Menu>
-          </Grid.Column>
-          </Grid>
-          :
-          null }
-            </div>
+                <Menu.Item as="a">Recipes</Menu.Item>
+                </Link>
+                <Dropdown item text="Account">
+                <Dropdown.Menu>
+                <Link to='/account_info'>
+                  <Dropdown.Item as="a" >
+                    Settings
+                  </Dropdown.Item>
+                  </Link>
+                  <Dropdown.Item as="a" onClick={this.handleSignOut}>
+                    Sign Out
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+          
+           
+              </Menu.Menu>
+            </Container>
+          </Menu>
+        </Grid>
+        :
+        null }
+</div>
+     
+
         )
     }
 

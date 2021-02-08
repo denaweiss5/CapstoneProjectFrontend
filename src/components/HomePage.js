@@ -1,86 +1,63 @@
-import React from 'react'
-import {
-    Button,
-    Container
-  } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
+import React from "react";
+import { Button, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class HomePage extends React.Component {
-
-    componentDidMount(){
-        if(!this.props.currentUser){
-            this.props.history.push('/')
-        }
+  componentDidMount() {
+    if (!this.props.currentUser) {
+      this.props.history.push("/");
     }
+  }
 
-    render(){
-        return(
-            <div>
-                <Container text >
-                <Link to ='/myWeightJourney'>
-                <Button className='homebtns' color='white'
-                  style={{
-                    marginLeft: '50px',
-                    marginRight: '15px',
-                    marginBottom: '15px',
-                    minHeight: '150px',
-                    minWidth: '250px',
-                    fontSize: '30px'
-                }}
-                >
-                    My Weight Journey
+  render() {
+    const style = {
+      margin: "30px",
+      minHeight: "100px",
+      minWidth: "200px",
+      fontSize: "20px",
+    };
+    return (
+      <div>
+        <Grid verticalAlign="middle" columns={4} centered>
+          <Grid.Row>
+            <Grid.Column>
+              <Link to="/myWeightJourney">
+                <Button className="homebtns" color="white" style={style}>
+                  My Weight Journey
                 </Button>
-                </Link>
-                <Link to ='/myDiaries'>
-                <Button className='homebtns' color='white'
-                  style={{
-                    marginLeft: '15px',
-                    marginBottom: '15px',
-                    minHeight: '150px',
-                    minWidth: '250px',
-                    fontSize: '30px'
-                }}
-                >
-                    My Diary
+              </Link>
+            </Grid.Column>
+            <Grid.Column>
+              <Link to="/myDiaries">
+                <Button className="homebtns" color="white" style={style}>
+                  My Diary
                 </Button>
-                </Link>
-                <Link to ='/myHabits'>
-                <Button className='homebtns' color='white'
-                  style={{
-                    marginLeft: '50px',
-                    marginRight: '15px',
-                    marginTop: '15px',
-                    minHeight: '150px',
-                    minWidth: '250px',
-                    fontSize: '30px'
-                }}
-                >
-                    My Habits
+              </Link>
+              <br />
+              <Link to="/myHabits">
+                <Button className="homebtns" color="white" style={style}>
+                  My Habits
                 </Button>
-                </Link>
-                <Link to ='/recipes'>
-                <Button className='homebtns' color='white'
-                style={{
-                marginLeft: '15px',
-                marginTop: '15px',
-                minHeight: '150px',
-                minWidth: '250px',
-                fontSize: '30px'
-                 }}
-                >
-                    Recipes
+              </Link>
+            </Grid.Column>
+            <Grid.Column>
+              <Link to="/recipes">
+                <Button className="homebtns" color="white" style={style}>
+                  Recipes
                 </Button>
-                </Link>
-                </Container>
-            </div>
-        )
-    }
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        currentUser: state.currentUser
-    }
-}
-export default connect(mapStateToProps)(HomePage)
+  return {
+    currentUser: state.currentUser,
+  };
+};
+export default connect(mapStateToProps)(HomePage);

@@ -65,7 +65,7 @@ class Recipes extends React.Component {
       clearInterval(this.state.intervalId);
     }
     window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
-  }
+  };
 
   scrollToTop = () => {
     let intervalId = setInterval(
@@ -73,37 +73,48 @@ class Recipes extends React.Component {
       this.props.delayInMs
     );
     this.setState({ intervalId: intervalId });
-  }
+  };
 
   render() {
     return (
-      <div
-        style={{
-          paddingLeft: "160px",
-          paddingTop: "100px",
-        }}
-      >
-        <Grid>
-          <Grid.Row>
-            {this.props.recipes.map((recipe) => {
-              return this.renderCard(recipe);
-            })}
-          </Grid.Row>
-        </Grid>
+      <div>
         <Button
+          onClick={() => this.props.history.goBack()}
+          style={{    
+          float: "left",
+          marginTop: "60px"}}
+        >
+          Back
+        </Button>
+
+        <div
           style={{
-            float: "right",
-            marginBottom: "10px",
-            marginRight: "10px",
-            padding: "20px",
+            paddingLeft: "160px",
+            paddingTop: "100px",
           }}
-          icon="angle double up"
-          title="Back to top"
-          className="scroll"
-          onClick={() => {
-            this.scrollToTop();
-          }}
-        ></Button>
+        >
+          <Grid>
+            <Grid.Row>
+              {this.props.recipes.map((recipe) => {
+                return this.renderCard(recipe);
+              })}
+            </Grid.Row>
+          </Grid>
+          <Button
+            style={{
+              float: "right",
+              marginBottom: "10px",
+              marginRight: "10px",
+              padding: "20px",
+            }}
+            icon="angle double up"
+            title="Back to top"
+            className="scroll"
+            onClick={() => {
+              this.scrollToTop();
+            }}
+          ></Button>
+        </div>
       </div>
     );
   }
