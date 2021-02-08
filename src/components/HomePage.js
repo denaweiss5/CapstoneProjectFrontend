@@ -59,7 +59,7 @@ class HomePage extends React.Component {
                     My Habits
                 </Button>
                 </Link>
-                <Link to ='/find_recipes'>
+                <Link to ='/recipes'>
                 <Button className='homebtns' color='white'
                 style={{
                 marginLeft: '15px',

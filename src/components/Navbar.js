@@ -47,7 +47,7 @@ class Navbar extends React.Component{
               <Link to='/myHabits'>
               <Menu.Item className='menuitem' id='menuitem' as="a">My Habits</Menu.Item>
               </Link>
-              <Link to='/find_recipes'>
+              <Link to='/recipes'>
               <Menu.Item className='menuitem' id='menuitem' as="a">Recipes</Menu.Item>
               </Link>
               <Divider hidden />

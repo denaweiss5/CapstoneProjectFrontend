@@ -12,14 +12,15 @@ import Habits from './components/Habits'
 import RecipesContainer from './components/RecipesContainer'
 import AccountInfo from './components/AccountInfo'
 import Recipes from './components/Recipes'
-
+import RecipeCard from './components/RecipeCard';
+import history from './history'
 
 class App extends React.Component {
 
 
   render(){
     return (
-      <BrowserRouter>
+      <BrowserRouter history={history}>
       <div className="App">
         <header className="App-header">
      
@@ -33,8 +34,9 @@ class App extends React.Component {
           <Route component={WeightEntriesContainer} path='/myWeightJourney' />
           <Route component={Diaries} path='/myDiaries'/>
           <Route component={Habits} path='/myHabits'/>
-          <Route component={RecipesContainer} path='/find_recipes'/>
-          <Route component={Recipes} path='/recipes'/>
+          <Route component={(props) => <RecipesContainer {...props}/>} path='/recipes' />
+          <Route component={(props) => <Recipes {...props}/>}path='/myRecipes' />
+          <Route component={RecipeCard} path='/show_recipe' />
           <Route component={LandingPage} path='/'/>
 
           </Switch>
