@@ -31,7 +31,10 @@ class LoginForm extends React.Component {
           headers: {
           'Content-Type': 'application/json'
           },
-          body:  JSON.stringify(this.state)
+          body:  JSON.stringify({
+            email: this.state.email,
+            password: this.state.password
+          })
       }
       fetch("http://localhost:3000/auth", reqObj)
       .then(resp => resp.json())
@@ -41,7 +44,9 @@ class LoginForm extends React.Component {
                   error: data.error
               })
           } else {
-              this.props.loginSuccess(data)
+              localStorage.setItem('jwt_token', data.jwt_token)
+              /// store token in local storage- store of memory that persists across refreshes
+              this.props.loginSuccess(data.user)
               this.props.history.push('/home')
           }
       })
@@ -67,17 +72,13 @@ class LoginForm extends React.Component {
         <Form.Field required>
         <label>Password</label>
         <Input 
+        type='password'
         name='password' 
         placeholder='Password'
         value={this.state.password}
         onChange={this.handleChange}
         />
         </Form.Field>
-        <Message
-          error
-          header='Incorrect Information'
-          content='Email or Password not found!'
-        />
         <Form.Button content='Sign In' />
     </Form>
     </div>

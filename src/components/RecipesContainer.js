@@ -24,7 +24,7 @@ class RecipesContainer extends React.Component{
                 return recipe
             })
             this.props.findRecipes(recipes)
-            this.props.history.push('/myRecipes')
+            this.props.history.push(`/myRecipes/${query}`)
         })
     }
 

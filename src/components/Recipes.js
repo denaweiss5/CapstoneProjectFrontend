@@ -3,7 +3,7 @@ import { Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Card, Icon, Image } from "semantic-ui-react";
 import RecipeCard from "./RecipeCard";
-import { viewRecipe } from "../actions/recipes";
+import { findRecipes, viewRecipe } from "../actions/recipes";
 
 class Recipes extends React.Component {
   constructor() {
@@ -12,6 +12,27 @@ class Recipes extends React.Component {
     this.state = {
       intervalId: 0,
     };
+  }
+
+  componentDidMount(){
+
+    const query = this.props.match.params.category
+      if(this.props.recipes.length === 0){
+        fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=25&query=${query}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+                "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+            }
+        })
+        .then(resp => resp.json())
+        .then(recipesArr => {
+            const recipes = recipesArr.results.map(recipe => {
+                return recipe
+            })
+            this.props.findRecipes(recipes)
+        })
+      }
   }
 
   handleClick = (id) => {
@@ -29,6 +50,7 @@ class Recipes extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipeInfo) => {
+          console.log(recipeInfo)
         this.props.viewRecipe(recipeInfo);
         this.props.history.push("/show_recipe");
       });
@@ -54,7 +76,7 @@ class Recipes extends React.Component {
           }}
         />
         <Card.Content>
-          <Card.Header>{title}</Card.Header>
+          <Card.Header >{title}</Card.Header>
         </Card.Content>
       </Card>
     );
@@ -82,7 +104,8 @@ class Recipes extends React.Component {
           onClick={() => this.props.history.goBack()}
           style={{    
           float: "left",
-          marginTop: "60px"}}
+          marginTop: "80px",
+          marginLeft:'10px'}}
         >
           Back
         </Button>
@@ -128,6 +151,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   viewRecipe: viewRecipe,
+  findRecipes: findRecipes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

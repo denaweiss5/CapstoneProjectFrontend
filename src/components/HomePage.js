@@ -3,12 +3,9 @@ import { Button, Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+
 class HomePage extends React.Component {
-  componentDidMount() {
-    if (!this.props.currentUser) {
-      this.props.history.push("/");
-    }
-  }
+
 
   render() {
     const style = {
@@ -55,9 +52,5 @@ class HomePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser,
-  };
-};
-export default connect(mapStateToProps)(HomePage);
+
+export default HomePage;

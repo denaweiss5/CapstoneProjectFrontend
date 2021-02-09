@@ -13,6 +13,12 @@ class RecipeCard extends React.Component {
             protein: ''
         }
     }
+//// grab id from url and redo fetch
+    componentDidMount(){
+        if(this.props.recipe === null){
+            this.props.history.push('/home')
+        }
+    }
   renderNutrition = (id) => {
     fetch(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionWidget.json`,
@@ -49,36 +55,38 @@ class RecipeCard extends React.Component {
 
 
     return (
-      <div
-      >
-        <div class="ui container">
-          <div class="ui grid">
-            <div class="thirteen wide column">
-                <Button  onClick={()=>this.props.history.goBack()} style={{marginTop: '50px', float: 'left'}}>Back</Button>
-              <p>{title} </p>
+      <div style={{marginTop:'80px', textAlign:'center', }} >
+        <div>
+          <div >
+            <div >
+                <Button  onClick={()=>this.props.history.goBack()}  style={{    
+          float: "left", marginLeft: '10px'}}>Back</Button>
+              <p style={{marginRight:'8%'}}>{title} </p>
               
               <Image
                 src={image}
                 style={{
                   display: 'block',
                   marginLeft: 'auto',
-                  marginRight: 'auto',
-                  width: '50%',
+                  marginRight: 'auto'
                 }}
               />
-              <h2 style={{border: '2px solid red', float: 'right', width: '220px', backgroundColor: 'white', color: 'black'}}>
+              <br></br>
+              <div style={{border: '2px solid black', textAlign:'center', display: 'inline-block', padding:'1px', width:'300px', backgroundColor: 'white', color: 'black', }}>
             <p>Total Time: {readyInMinutes} min</p>
             <p>servings: {servings}</p>
-              </h2>
-            </div>
+              </div>
+              </div>
+            
+            
 
             <div class="ui hidden divider"></div>
             <div class="ui grid">
               <div class="two column row">
                 <div class="column">
-                  <h1 class="ui header">Ingredients</h1>
+                  <h1 style={{ marginRight:'400px', fontSize:'25px' }} class="ui header">Ingredients</h1>
                   <p>
-                    <ul style={{ textAlign: "left" }}>
+                    <ul style={{ textAlign: "left", fontSize:'20px' }}>
                       {extendedIngredients.map((ing) => {
                         return <li>{ing.original}</li>;
                       })}
@@ -86,24 +94,27 @@ class RecipeCard extends React.Component {
                   </p>
                 </div>
                 <div class="column">
-                  <h1 class="ui header">Directions</h1>
+                  <h1 style={{ marginRight:'400px', fontSize:'25px' }} class="ui header">Directions</h1>
                   <p>
-                    <ol>
-                      {analyzedInstructions[0].steps.map((step) => {
+                    <ol style={{ textAlign: "left", fontSize:'20px'  }}>
+                      {analyzedInstructions[0] ? 
+                      analyzedInstructions[0].steps.map((step) => {
                         return <li>{step.step}</li>;
-                      })}
+                      }) : 
+                        <li>Sorry, but at this time we are still gathering the directions.</li>
+                    }
                     </ol>
                   </p>
                 </div>
               </div>
-              <div class="one column row">
-                <div class="column">
-                  <h1 class="ui header">Nutrion Facts</h1>
+              <div >
+                <div class="column" style={{marginLeft:'50px'}}>
+                  <h1 style={{  fontSize:'25px' }} class="ui header">Nutrion Facts</h1>
                   <p>{this.renderNutrition(id)}</p>
-                    <h3>Calories: {this.state.calories}</h3>
-                    <h3>Carbs: {this.state.carbs}</h3>
-                    <h3>Fat: {this.state.fat}</h3>
-                    <h3>Protein: {this.state.protein}</h3>
+                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }} >Calories: {this.state.calories}</h3>
+                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Carbs: {this.state.carbs}</h3>
+                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Fat: {this.state.fat}</h3>
+                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Protein: {this.state.protein}</h3>
                 </div>
               </div>
             </div>

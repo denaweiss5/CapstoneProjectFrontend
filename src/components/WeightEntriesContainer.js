@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createEntry } from "../actions/weightEntries";
 import { Button, Form, Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import { currentUser } from "../actions/auth";
 
 class WeightEntriesContainer extends React.Component {
   constructor() {
@@ -17,11 +18,7 @@ class WeightEntriesContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (!this.props.currentUser) {
-      this.props.history.push("/");
-    }
-  }
+
 
   toggleAddWeight = () => {
     this.setState({
@@ -208,7 +205,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  createEntry: createEntry,
+  createEntry: createEntry
 };
 
 export default connect(

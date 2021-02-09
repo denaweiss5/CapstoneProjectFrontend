@@ -14,7 +14,7 @@ class WeightEntriesContainer extends React.Component {
       category: "",
       duration: "",
       calories_burned: "",
-      error: "",
+      error: ""
     };
   }
 
@@ -24,11 +24,7 @@ class WeightEntriesContainer extends React.Component {
     });
   };
 
-  componentDidMount() {
-    if (!this.props.currentUser) {
-      this.props.history.push("/");
-    }
-  }
+
 
   handleChange = (e) => {
     this.setState({
@@ -67,8 +63,7 @@ class WeightEntriesContainer extends React.Component {
         this.setState({
             category: "",
             duration: "",
-            calories_burned: "",
-            error: "",
+            calories_burned: ""
         })
       });
   };
@@ -94,6 +89,8 @@ class WeightEntriesContainer extends React.Component {
   render() {
     return (
       <div>
+    { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+
         <Table singleLine>
           <Table.Header>
             <Table.Row >
@@ -142,7 +139,7 @@ class WeightEntriesContainer extends React.Component {
                 ></Input>
                 <Input
                  style={{display: 'block'}}
-                  type="text"
+                  type="number"
                   name="calories_burned"
                   value={this.state.calories_burned}
                   onChange={this.handleChange}

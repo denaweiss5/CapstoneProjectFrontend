@@ -1,36 +1,91 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css' 
+import { Form, Input } from 'semantic-ui-react'
+import { editUser } from '../actions/users'
 
 class AccountInfo extends React.Component{
-
-    componentDidMount(){
-        if(!this.props.currentUser){
-            this.props.history.push('/')
-        }
+  
+constructor(props){
+    super(props)
+    this.state={
+        name: props.currentUser.name ,
+        email: props.currentUser.email ,
+        password: '',
+        error: ''
     }
+}
+handleChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+}
 
+handleSubmit = (e) => {
+    e.preventDefault()
+    const {id} = this.props.currentUser
+    const reqObj = {
+        method: 'PATCH',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body:  JSON.stringify({
+            email: this.state.email,
+            name: this.state.name,
+            password: this.state.password
+          })
+    }
+    fetch(`http://localhost:3000/users/${id}`, reqObj)
+    .then(resp => resp.json())
+    .then(updatedUser => {
+        if (updatedUser.error){
+            this.setState({
+                error: updatedUser.error
+            })
+        } else {
+            this.props.editUser(updatedUser)
+            this.props.history.push('/home')
+        }
+    })
+}
     render(){
        
         const { name, email } = this.props.currentUser
         return (
-            <div >
-    
-                <div className ='account-details'>
-                <h1>Account Settings</h1>
-                <div id='namediv'>
-                <h3>Name:</h3>
-                <h2>{name}</h2>
-                </div>
-                <div>
-                <h3>Email:</h3>
-                <h2>{email}</h2>
-                </div>
-                </div>
-
-            </div>
+            <div>
+            { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+            <Form  className='loginform' widths='equal' onSubmit={this.handleSubmit} style={{textAlign: 'left'}}>
+            <h1>Account Info</h1>
+            <br></br>
+           <Form.Field >
+            <label>Name</label>
+            <Input 
+            name='name' 
+            value={this.state.name}
+            onChange={this.handleChange}
+            />
+            </Form.Field>
+            <Form.Field >
+            <label>Email</label>
+            <Input 
+            name='email' 
+            value={this.state.email}
+            onChange={this.handleChange}
+            />
+            </Form.Field>
+            <Form.Field >
+            <label>Password confirmation</label>
+            <Input 
+            name='password' 
+            value={this.state.password}
+            onChange={this.handleChange}
+            />
+            </Form.Field>
+            <Form.Button content='Save changes' />
+            <Form.Button content='Cancel' />
+        </Form>
       
-
+</div>
 
         )}
 }
@@ -40,4 +95,8 @@ const mapStateToProps = (state) => {
         currentUser: state.currentUser
     }
 }
-export default connect(mapStateToProps)(AccountInfo);
+
+const mapDispatchToProps = {
+    editUser: editUser
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo);

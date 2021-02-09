@@ -2,6 +2,7 @@ const mealEntries = (state = [], action) => {
   let updatedMealEntries;
   switch (action.type) {
     case "LOGIN_SUCCESS":
+    case 'CURRENT_USER':
     case "CREATE_USER":
       return action.user.meal_entries;
     case "CREATE_ENTRY":

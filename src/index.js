@@ -7,6 +7,7 @@ import { createStore } from 'redux'
 import rootReducer from './reducers/index'
 import { Provider } from 'react-redux'
 import { BrowserRouter} from 'react-router-dom'
+import history from './history'
 
 
 
@@ -18,7 +19,7 @@ const store = createStore(rootReducer,
 ReactDOM.render(
   <BrowserRouter>
   <Provider store={store}>
-    <App />
+    <App history={history} />
   </Provider>
   </BrowserRouter>,
   document.getElementById('root')

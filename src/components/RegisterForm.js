@@ -80,18 +80,10 @@ class RegisterForm extends React.Component {
         <Form.Field required>
         <label>Password</label>
         <Input 
+        type='password'
         name='password' 
         placeholder='Password'
         value={this.state.password}
-        onChange={this.handleChange}
-        />
-        </Form.Field>
-        <Form.Field required>
-        <label>Password confirmation</label>
-        <Input 
-        name='passwordConfirmation'
-        placeholder='Password confirmation'
-        value={this.state.passwordConfirmation}
         onChange={this.handleChange}
         />
         </Form.Field>

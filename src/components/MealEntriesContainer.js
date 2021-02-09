@@ -17,11 +17,11 @@ class MealEntriesContainer extends React.Component {
       protein: '',
       calories: '',
       addMeal: true,
+      error: ''
     };
   }
 
   toggleAddMeal = () => {
-    console.log("meal");
     this.setState({
       addMeal: !this.state.addMeal,
     });
@@ -79,6 +79,7 @@ class MealEntriesContainer extends React.Component {
     console.log(this.props.mealEntries);
     return (
       <div>
+                  { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
         <Table>
           <Table.Header>
             <Table.Row>
@@ -123,7 +124,7 @@ class MealEntriesContainer extends React.Component {
             ></Input>
             <Input
              style={{display: 'block'}}
-              type="text"
+              type="number"
               name="carbs"
               value={this.state.carbs}
               onChange={this.handleChange}
@@ -131,7 +132,7 @@ class MealEntriesContainer extends React.Component {
             ></Input>
              <Input
               style={{display: 'block'}}
-              type="text"
+              type="number"
               name="protein"
               value={this.state.protein}
               onChange={this.handleChange}
@@ -139,7 +140,7 @@ class MealEntriesContainer extends React.Component {
             ></Input>
              <Input
               style={{display: 'block'}}
-              type="text"
+              type="number"
               name="calories"
               value={this.state.calories}
               onChange={this.handleChange}

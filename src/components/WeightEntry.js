@@ -4,11 +4,6 @@ import { deleteEntry } from '../actions/weightEntries'
 
 class WeightEntry extends React.Component{
 
-    componentDidMount(){
-        if(!this.props.currentUser){
-            this.props.history.push('/')
-        }
-    }
 
     handleDelete = () => {
         const { id } = this.props.entry
@@ -23,9 +18,10 @@ class WeightEntry extends React.Component{
 
     render(){
         const { weight, date, id } = this.props.entry
-        const year = date.slice(0, 4)
-        const month = date.slice(5,7)
-        const day = date.slice(8,10)
+        
+        const year = date.toString().slice(0, 4)
+        const month = date.toString().slice(5,7)
+        const day = date.toString().slice(8,10)
         const updatedDate = `${month}/${day}/${year}`
         return(
             <div >

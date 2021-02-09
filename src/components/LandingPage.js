@@ -9,7 +9,7 @@ class LandingPage extends React.Component{
 
     render(){
         return(
-            <Container text>
+            <Container text >
                 <Header
                 as='h1'
                 content='Healthy Habits'

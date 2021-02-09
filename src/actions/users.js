@@ -4,3 +4,10 @@ export const createUser = (newUser) => {
       user: newUser
     }
   }
+
+  export const editUser = (updatedUser) => {
+    return {
+      type: 'EDIT_USER',
+      user: updatedUser
+    }
+  }

@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logoutUser } from '../actions/auth'
 import "semantic-ui-css/semantic.min.css";
+import SearchBar from './SearchBar'
+import history from "../history";
+
+
 
 import {
   Button,
@@ -22,8 +26,8 @@ import {
 class Navbar extends React.Component{
 
     handleSignOut = () => {
+      localStorage.removeItem('jwt_token')
         this.props.logoutUser()
-
     }
 
     render(){
@@ -32,27 +36,29 @@ class Navbar extends React.Component{
 <div className="App">
   { this.props.currentUser ? 
         <Grid padded className="tablet computer only" >
-          <Menu borderless fluid fixed="top" size="huge">
+          <Menu borderless fluid fixed="top" size="huge" >
             <Container>
-            <Menu.Item as="a" >Healthy Habits</Menu.Item>
             <Link to='/home'>
-              <Menu.Item active as="a" >
+              <Menu.Item style={{marginTop: '10px'}} active as="a" >
                 Home
               </Menu.Item>
               </Link>
               <Link to='/myWeightJourney'>
-              <Menu.Item as="a" >My Weight Journey</Menu.Item>
+              <Menu.Item as="a" style={{marginTop: '10px'}} >My Weight Journey</Menu.Item>
               </Link>
               <Link to='/myDiaries'>
-              <Menu.Item as="a">My Diaries</Menu.Item>
+              <Menu.Item as="a" style={{marginTop: '10px'}} >My Diaries</Menu.Item>
               </Link>
               <Link to='/myHabits'>
-              <Menu.Item as="a">My Habits</Menu.Item>
+              <Menu.Item as="a" style={{marginTop: '10px'}} >My Habits</Menu.Item>
               </Link>
               <Menu.Menu position="right">
               <Link to='/recipes'>
-                <Menu.Item as="a">Recipes</Menu.Item>
+                <Menu.Item as="a" style={{marginTop: '10px'}} >Recipes</Menu.Item>
                 </Link>
+                <Menu.Item>
+             <SearchBar history={history}/>
+           </Menu.Item>
                 <Dropdown item text="Account">
                 <Dropdown.Menu>
                 <Link to='/account_info'>
@@ -60,13 +66,14 @@ class Navbar extends React.Component{
                     Settings
                   </Dropdown.Item>
                   </Link>
+                  <Link to='/'>
                   <Dropdown.Item as="a" onClick={this.handleSignOut}>
                     Sign Out
                   </Dropdown.Item>
+                  </Link>
                 </Dropdown.Menu>
               </Dropdown>
-          
-           
+             
               </Menu.Menu>
             </Container>
           </Menu>
