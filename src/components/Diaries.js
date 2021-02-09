@@ -9,14 +9,14 @@ class Diaries extends React.Component{
 
     render(){
         return (
-            <div>
-                <Segment>
+            <div style={{marginTop : '80px', marginBottom:'80px', textAlign: 'center'}}>
+                <Segment definition >
                     <Header as='h3'>Meals</Header>
                     <MealEntriesContainer/>
     
                     <Divider section />
 
-                    <Header as='h3'>Activities</Header>
+                    <Header as='h3' >Activities</Header>
                     <ExerciseEntriesContainer/>
                     <Divider section />
                     <NetCalories/>

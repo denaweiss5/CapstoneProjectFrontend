@@ -10,10 +10,10 @@ class ExerciseEntry extends React.Component{
            
          
                  <Table.Body>
-                    <Table.Row>
+                    <Table.Row >
                         <Table.Cell>{category}</Table.Cell>
                         <Table.Cell>{duration} min</Table.Cell>
-                        <Table.Cell>{calories_burned}</Table.Cell>
+                        <Table.Cell >{calories_burned}</Table.Cell>
                     </Table.Row>
                     </Table.Body>
             

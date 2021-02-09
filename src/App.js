@@ -14,6 +14,8 @@ import AccountInfo from './components/AccountInfo'
 import Recipes from './components/Recipes'
 import RecipeCard from './components/RecipeCard';
 import history from './history'
+import MealEntriesContainer from './components/MealEntriesContainer';
+// import SB from './components/SB'
 
 class App extends React.Component {
 
@@ -25,7 +27,7 @@ class App extends React.Component {
         <header className="App-header">
      
           <Navbar/>
-          
+          {/* <SB/> */}
           <Switch>
           <Route component={AccountInfo} path='/account_info' />
           <Route component={HomePage} path='/home'/>
@@ -38,7 +40,7 @@ class App extends React.Component {
           <Route component={(props) => <Recipes {...props}/>}path='/myRecipes' />
           <Route component={RecipeCard} path='/show_recipe' />
           <Route component={LandingPage} path='/'/>
-
+          <Route component={(props) => <MealEntriesContainer {...props}/>} path='/myMeals' />
           </Switch>
         </header>
       </div>

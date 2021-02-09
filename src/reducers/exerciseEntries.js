@@ -1,12 +1,16 @@
 const exerciseEntries = (state = [], action) => {
-    switch(action.type){
-        case 'LOGIN_SUCCESS':
-        case 'CREATE_USER':
-            return action.user.exercise_entries
-      
-        default:
-            return state
-    }
-}
+    let updatedExerciseEntries;
+  switch (action.type) {
+    case "LOGIN_SUCCESS":
+    case "CREATE_USER":
+      return action.user.exercise_entries;
+    case "CREATE_ENTRY":
+      updatedExerciseEntries = [...state, action.entry];
+      return updatedExerciseEntries;
 
-export default exerciseEntries
+    default:
+      return state;
+  }
+};
+
+export default exerciseEntries;

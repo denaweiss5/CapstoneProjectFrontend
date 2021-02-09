@@ -31,7 +31,7 @@ class Navbar extends React.Component{
 
 <div className="App">
   { this.props.currentUser ? 
-        <Grid padded className="tablet computer only">
+        <Grid padded className="tablet computer only" >
           <Menu borderless fluid fixed="top" size="huge">
             <Container>
             <Menu.Item as="a" >Healthy Habits</Menu.Item>
