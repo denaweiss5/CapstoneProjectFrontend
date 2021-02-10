@@ -50,9 +50,8 @@ class Recipes extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipeInfo) => {
-          console.log(recipeInfo)
         this.props.viewRecipe(recipeInfo);
-        this.props.history.push("/show_recipe");
+        this.props.history.push(`/show_recipes/${id}`);
       });
   };
 
@@ -77,6 +76,7 @@ class Recipes extends React.Component {
         />
         <Card.Content>
           <Card.Header >{title}</Card.Header>
+        {/* <p>{}recipe.calories</p> */}
         </Card.Content>
       </Card>
     );
@@ -107,7 +107,7 @@ class Recipes extends React.Component {
           marginTop: "80px",
           marginLeft:'10px'}}
         >
-          Back
+          Back To All Recipes
         </Button>
 
         <div

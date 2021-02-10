@@ -24,47 +24,46 @@ class RecipesContainer extends React.Component{
                 return recipe
             })
             this.props.findRecipes(recipes)
-            this.props.history.push(`/myRecipes/${query}`)
+            this.props.history.push(`/all_recipes/${query}`)
         })
     }
 
 
 
     render(){
-     
+
         return (
 
             <div>
                  
                 <Grid className='recipesgrid'>
-                <Grid.Row  columns={3}>
+                <Grid.Row  columns={4}>
                 <Grid.Column >
-                <Button circular color='white' size='massive' content='Low Calories' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Low Calories' style={{ border: `3px solid rgb(202, 49, 49)`, height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Low Carbs' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Low Carbs' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Low Fat' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
-                </Grid.Column>
-                </Grid.Row>
-                <Grid.Row  columns={2}>
-                <Grid.Column>
-                <Button circular color='white' size='massive' content='High Protein' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Low Fat' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Vegan' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='High Protein' style={{border: '3px solid rgb(47, 47, 209)',height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 </Grid.Row>
-                <Grid.Row  columns={3}>
+                <Grid.Row  columns={4}>
+               
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Vegetarian' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Vegan' style={{border: `3px solid rgb(202, 49, 49)`, height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Gluten Free' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Vegetarian' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button circular color='white' size='massive' content='Dairy Free' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button  color='white' size='massive' content='Gluten Free' style={{height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
+                </Grid.Column>
+                <Grid.Column>
+                <Button  color='white' size='massive' content='Dairy Free' style={{border: '3px solid rgb(47, 47, 209)', height:'175px', width:'175px', color: 'black'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>

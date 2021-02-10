@@ -23,15 +23,16 @@ class SearchBar extends React.Component {
     });
   };
 
-  handleChange = (e) => {
+  handleChange = (e, ) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      keyword: e.target.value,
     });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const query = this.state.keyword;
+    console.log(query)
 
     fetch(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${query}`,
@@ -73,11 +74,35 @@ class SearchBar extends React.Component {
       .then((recipeInfo) => {
           console.log(recipeInfo)
         this.props.viewRecipe(recipeInfo);
-        this.props.history.push("/show_recipe");
+        this.props.history.push(`/show_recipe/${id}`);
       });
   };
 
-  render() {
+// componentDidMount(){
+//     let initialResults = []
+//     fetch(
+//               `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${query}`,
+//               {
+//                 method: "GET",
+//                 headers: {
+//                   "x-rapidapi-key":
+//                     "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+//                   "x-rapidapi-host":
+//                     "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+//                 },
+//               }
+//             )
+//               .then((resp) => resp.json())
+//               .then((recipeArr) => {
+//                 this.setState({
+//                   results: recipeArr.results,
+//                 })
+                
+//               });
+
+// }
+
+render() {
     return (
       <div className='SB' >
         {this.props.currentUser ? (

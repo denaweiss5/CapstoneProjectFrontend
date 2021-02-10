@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { currentUser } from "./actions/auth";
 
 
+
 class App extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("jwt_token");
@@ -64,9 +65,9 @@ class App extends React.Component {
               />
               <Route
                 component={(props) => <Recipes {...props} />}
-                path="/myRecipes/:category"
+                path="/all_recipes/:category"
               />
-              <Route component={RecipeCard} path="/show_recipe" />
+              <Route component={RecipeCard} path="/show_recipes/:id" />
               <Route component={LandingPage} path="/" />
               <Route
                 component={(props) => <MealEntriesContainer {...props} />}

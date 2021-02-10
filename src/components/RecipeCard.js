@@ -1,6 +1,8 @@
 import React from "react";
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+import { Button, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { viewRecipe } from "../actions/recipes";
+
 
 class RecipeCard extends React.Component {
 
@@ -15,10 +17,28 @@ class RecipeCard extends React.Component {
     }
 //// grab id from url and redo fetch
     componentDidMount(){
-        if(this.props.recipe === null){
-            this.props.history.push('/home')
-        }
+       const id = parseInt(this.props.match.params.id)
+       console.log(id)
+        if(!this.props.recipe){
+        fetch(
+            `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`,
+            {
+              method: "GET",
+              headers: {
+                "x-rapidapi-key":
+                  "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+                "x-rapidapi-host":
+                  "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+              }
+            }
+          )
+          .then((resp) => resp.json())
+          .then((recipeInfo) => {
+            this.props.viewRecipe(recipeInfo);
+          });
     }
+}
+
   renderNutrition = (id) => {
     fetch(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionWidget.json`,
@@ -132,4 +152,10 @@ const mapStateToProps = (state) => {
     recipe: state.recipe,
   };
 };
-export default connect(mapStateToProps)(RecipeCard);
+
+const mapDispatchToProps = {
+    viewRecipe: viewRecipe
+  };
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeCard);
