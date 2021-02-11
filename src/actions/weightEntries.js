@@ -11,3 +11,4 @@ export const createEntry = (newEntry) => {
         entry: newEntry
     }
 }
+

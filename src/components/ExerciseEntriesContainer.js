@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import ExerciseEntry from "./ExerciseEntry";
 import { Table } from "semantic-ui-react";
 import { Button, Form, Input } from "semantic-ui-react";
-import { createEntry } from "../actions/exerciseEntries";
+import { createEntry, totalExerciseCals } from "../actions/exerciseEntries";
 
 class WeightEntriesContainer extends React.Component {
   constructor() {
@@ -70,7 +70,9 @@ class WeightEntriesContainer extends React.Component {
 
   renderTotal = () => {
     let total;
-    let calories = this.props.exerciseEntries.map((entry) => {
+    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
+    const entries = this.props.exerciseEntries.filter(entry => entry.date === date)
+    let calories = entries.map((entry) => {
       return entry.calories_burned
     });
     const updatedCalories = (calories.map(entry => {
@@ -81,32 +83,35 @@ class WeightEntriesContainer extends React.Component {
         }
     }))
     if (updatedCalories.length > 0) {
-      return (updatedCalories.reduce((a, b) => a + b, 0));
+      const exerciseCals = updatedCalories.reduce((a, b) => a + b, 0);
+      this.props.totalExerciseCals(exerciseCals)
+      return exerciseCals
     } else {
       return (total = 0);
     }
   };
   render() {
+    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
+    const entries = this.props.exerciseEntries.filter(entry => entry.date === date)
+    const myEntry = entries.map(entry => <ExerciseEntry entry={entry} key={entry.id} />)
     return (
       <div>
     { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
 
-        <Table singleLine>
+        <Table singleLine >
           <Table.Header>
             <Table.Row >
               <Table.HeaderCell>Activity Type</Table.HeaderCell>
               <Table.HeaderCell>Duration </Table.HeaderCell>
-              <Table.HeaderCell>Calories Burned</Table.HeaderCell>
+              <Table.HeaderCell >Calories Burned</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
-          {this.props.exerciseEntries.map((entry) => {
-            return <ExerciseEntry entry={entry} key={entry.id} />;
-          })}
+          {myEntry}
           <Table.Row >
             <Table.Cell>Total Calories Burned</Table.Cell>
             <Table.Cell></Table.Cell>
-            <Table.Cell>{this.renderTotal()} </Table.Cell>
+            <Table.Cell >{this.renderTotal()} </Table.Cell>
           </Table.Row>
         </Table>
     
@@ -177,6 +182,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   createEntry: createEntry,
+  totalExerciseCals: totalExerciseCals
 };
 
 export default connect(

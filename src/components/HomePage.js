@@ -15,8 +15,8 @@ class HomePage extends React.Component {
       fontSize: "20px",
     };
     return (
-      <div>
-        <Grid verticalAlign="middle" columns={4} centered>
+
+           <Grid verticalAlign="middle" columns={4} centered>
           <Grid.Row>
             <Grid.Column>
               <Link to="/myWeightJourney">
@@ -46,11 +46,13 @@ class HomePage extends React.Component {
               </Link>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
-      </div>
-    );
-  }
-}
+        </Grid> 
+
+
+
+    )
+      }
+    }
 
 
 export default HomePage;

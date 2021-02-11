@@ -4,3 +4,10 @@ export const createEntry = (newEntry) => {
         entry: newEntry
     }
 }
+
+export const totalExerciseCals = (exerciseCals) => {
+    return {
+        type: 'TOTAL_EXERCISE_CALS',
+        calories: exerciseCals
+    }
+}

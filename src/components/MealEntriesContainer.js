@@ -2,12 +2,14 @@ import React from "react";
 import { Table, Button, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 import MealEntry from "./MealEntry";
-import { createEntry } from "../actions/mealEntries";
+import { createEntry, totalMealCals } from "../actions/mealEntries";
 
 
 
 class MealEntriesContainer extends React.Component {
+  
   constructor() {
+    
     super();
 
     this.state = {
@@ -34,7 +36,8 @@ class MealEntriesContainer extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
+  
+    const updatedDate = this.props.date
     const name = this.state.name;
     const fat = this.state.fat;
     const carbs = this.state.carbs;
@@ -52,11 +55,13 @@ class MealEntriesContainer extends React.Component {
         protein: protein,
         calories: calories,
         user_id: this.props.currentUser.id,
+        date: updatedDate
       }),
     };
     fetch("http://localhost:3000/meal_entries", reqObj)
       .then((resp) => resp.json())
       .then((newEntry) => {
+        console.log(newEntry)
         if (newEntry.error) {
           this.setState({
             error: newEntry.error,
@@ -75,8 +80,34 @@ class MealEntriesContainer extends React.Component {
       });
   };
 
+  renderTotal = () => {
+    let total;
+    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
+    const entries = this.props.mealEntries.filter(entry => entry.date === date)
+    let calories = entries.map((entry) => {
+      return entry.calories
+    });
+    const updatedCalories = (calories.map(entry => {
+      if(entry===undefined){
+          return 0
+      } else {
+          return entry
+      }
+  }))
+  if (updatedCalories.length > 0) {
+    const mealCals = updatedCalories.reduce((a, b) => a + b, 0).toFixed(2)
+    this.props.totalMealCals(mealCals)
+    return mealCals
+  } else {
+    return (total = 0);
+  }
+  console.log(updatedCalories)
+  }
+
   render() {
-    console.log(this.props.mealEntries);
+    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
+const entries = this.props.mealEntries.filter(entry => entry.date === date)
+const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
     return (
       <div>
                   { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
@@ -90,11 +121,15 @@ class MealEntriesContainer extends React.Component {
               <Table.HeaderCell>Calories</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          {this.props.mealEntries.map((entry) => {
-            return <MealEntry entry={entry} key={entry.id} />;
-          })}
-       
-       
+          {myEntry}
+    
+          <Table.Row >
+            <Table.Cell>Total Calories Burned</Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell>{this.renderTotal()} </Table.Cell>
+          </Table.Row>
         </Table>
       
         {this.state.addMeal ? 
@@ -177,6 +212,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     createEntry: createEntry,
+    totalMealCals: totalMealCals
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MealEntriesContainer);

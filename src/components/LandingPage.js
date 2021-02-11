@@ -1,14 +1,22 @@
 import React from 'react'
 import { Container, Header, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 
 
 
 
 class LandingPage extends React.Component{
 
+    componentDidMount(){
+        if(this.props.currentUser){
+            return this.props.history.push('/home')
+        }
+    }
+
     render(){
         return(
+            <div className='land'>
             <Container text >
                 <Header
                 as='h1'
@@ -53,8 +61,15 @@ class LandingPage extends React.Component{
                 </Button>
                 </Link>
             </Container>
+            </div>
         )
     }
 }
 
-export default LandingPage
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(LandingPage)

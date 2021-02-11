@@ -54,7 +54,7 @@ class RegisterForm extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className='land'>
       { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null }
       <Form  className='registerform' widths='equal' onSubmit={this.handleSubmit}>
         <h1>Register</h1>

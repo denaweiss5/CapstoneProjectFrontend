@@ -10,7 +10,7 @@ class Recipes extends React.Component {
     super();
 
     this.state = {
-      intervalId: 0,
+      intervalId: 0
     };
   }
 
@@ -55,14 +55,18 @@ class Recipes extends React.Component {
       });
   };
 
+
   renderCard = (recipe) => {
     const { title, image, id } = recipe;
     return (
       <Card
         onClick={() => this.handleClick(id)}
+  
         style={{
           padding: "10px",
-          margin: "50px",
+          height: '70vh',
+          width: '27vw',
+          margin: "1vh",
         }}
       >
         <Image
@@ -75,7 +79,7 @@ class Recipes extends React.Component {
           }}
         />
         <Card.Content>
-          <Card.Header >{title}</Card.Header>
+          <Card.Header style={{fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{title}</Card.Header>
         {/* <p>{}recipe.calories</p> */}
         </Card.Content>
       </Card>
@@ -100,24 +104,25 @@ class Recipes extends React.Component {
   render() {
     return (
       <div>
-        <Button
+      
+      <Button
           onClick={() => this.props.history.goBack()}
-          style={{    
-          float: "left",
-          marginTop: "80px",
-          marginLeft:'10px'}}
+          style={{marginTop: '12vh', marginBottom: '0px', marginLeft: '3vh', float:'left'}}
         >
-          Back To All Recipes
+          Back To All Categories
         </Button>
-
+        <br></br>
+        <br></br>
+        <br></br>
         <div
           style={{
-            paddingLeft: "160px",
-            paddingTop: "100px",
+            paddingLeft: '9%',
+            paddingTop: "100px"
           }}
         >
-          <Grid>
-            <Grid.Row>
+      
+          <Grid >
+            <Grid.Row >
               {this.props.recipes.map((recipe) => {
                 return this.renderCard(recipe);
               })}

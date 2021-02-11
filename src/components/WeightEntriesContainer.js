@@ -75,7 +75,6 @@ class WeightEntriesContainer extends React.Component {
     if (weights.length > 0) {
       const a = weights[0];
       const b = weights[weights.length - 1];
-
       return (total = (a - b).toFixed(1));
     } else {
       return (total = 0);
@@ -83,6 +82,7 @@ class WeightEntriesContainer extends React.Component {
   };
 
   render() {
+
     return (
       <div>
         <h1

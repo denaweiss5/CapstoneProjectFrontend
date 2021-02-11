@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
+import { Button, Grid, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { viewRecipe } from "../actions/recipes";
 
@@ -18,7 +18,6 @@ class RecipeCard extends React.Component {
 //// grab id from url and redo fetch
     componentDidMount(){
        const id = parseInt(this.props.match.params.id)
-       console.log(id)
         if(!this.props.recipe){
         fetch(
             `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`,
@@ -75,27 +74,38 @@ class RecipeCard extends React.Component {
 
 
     return (
-      <div style={{marginTop:'80px', textAlign:'center', }} >
+      <div >
         <div>
           <div >
             <div >
-                <Button  onClick={()=>this.props.history.goBack()}  style={{    
-          float: "left", marginLeft: '10px'}}>Back</Button>
-              <p style={{marginRight:'8%'}}>{title} </p>
+                <Button  onClick={()=>this.props.history.goBack()}  
+                style={{marginTop: "12vh", marginBottom: '0px', marginLeft: '3vh', float: 'left'}}>Back To All Recipes</Button>
+              <div style={{ paddingTop: '120px', textAlign: 'center'}}>
+              <Grid > 
+                <Grid.Row>
+              <p style={{marginLeft:'28%'}}>{title} </p>
               
               <Image
                 src={image}
                 style={{
+                  paddingLeft: '2vh',
                   display: 'block',
                   marginLeft: 'auto',
                   marginRight: 'auto'
                 }}
               />
-              <br></br>
-              <div style={{border: '2px solid black', textAlign:'center', display: 'inline-block', padding:'1px', width:'300px', backgroundColor: 'white', color: 'black', }}>
+              
+              </Grid.Row>
+              <Grid.Row style={{display: 'block', marginLeft: '90vh'}}>
+              <div style={{  border: '2px solid black', textAlign:'center', width:'300px', backgroundColor: 'white', color: 'black', }}>
             <p>Total Time: {readyInMinutes} min</p>
             <p>servings: {servings}</p>
+           
               </div>
+              </Grid.Row>
+              <br></br>
+              
+              </Grid>
               </div>
             
             
@@ -142,6 +152,7 @@ class RecipeCard extends React.Component {
             <div class="ui divider"></div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

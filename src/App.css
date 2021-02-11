@@ -9,9 +9,28 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  color: black;
+  background: white;
+  background-position: center;
+  background-size: cover;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.land {
+  min-height: 100vh;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
   color: white;
   background: linear-gradient(to right, rgb(202, 49, 49) , rgb(47, 47, 209) );
-  /* background: white; */
   background-position: center;
   background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -94,3 +113,31 @@ position: fixed;
 .border-gradient-purple {
   border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
 }
+
+.col1 {
+  color: rgb(202, 49, 49);
+  width: 30vw;
+  height: 80vh;
+  margin: 1em;
+  padding: 1em;
+  border: solid;
+}
+
+.col2 {
+  color: rgb(158, 65, 161);
+  width: 30vw;
+  height: 80vh;
+  margin: 1em;
+  padding: 1em;
+  border: solid;
+}
+
+.col3 {
+  color: rgb(47, 47, 209);
+  width: 30vw;
+  height: 80vh;
+  margin: 1em;
+  padding: 1em;
+  border: solid;
+}
+

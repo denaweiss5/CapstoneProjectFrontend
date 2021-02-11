@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import LandingPage from "./components/LandingPage";
-import HomePage from "./components/HomePage";
+import redoHP from "./components/redoHP";
 import WeightEntriesContainer from "./components/WeightEntriesContainer";
 import Diaries from "./components/Diaries";
 import Habits from "./components/Habits";
@@ -36,7 +36,6 @@ class App extends React.Component {
       fetch("http://localhost:3000/current_user", reqObj)
         .then((resp) => resp.json())
         .then((data) => {
-          console.log(data)
           this.props.currentUser(data.user);
         });
     }
@@ -49,8 +48,9 @@ class App extends React.Component {
           <header className="App-header">
             <Navbar/>
             <Switch>
+    
               <Route component={AccountInfo} path="/account_info" />
-              <Route component={HomePage} path="/home" />
+              <Route component={redoHP} path="/home" />
               <Route component={LoginForm} path="/login" />
               <Route component={RegisterForm} path="/register" />
               <Route
@@ -68,7 +68,8 @@ class App extends React.Component {
                 path="/all_recipes/:category"
               />
               <Route component={RecipeCard} path="/show_recipes/:id" />
-              <Route component={LandingPage} path="/" />
+                <Route component={LandingPage} path="/" />
+    
               <Route
                 component={(props) => <MealEntriesContainer {...props} />}
                 path="/myMeals"

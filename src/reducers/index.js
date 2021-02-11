@@ -5,6 +5,8 @@ import mealEntriesReducer from './mealEntries'
 import weightEntriesReducer from './weightEntries'
 import recipesReducer from './recipes'
 import viewRecipeReducer from './viewRecipe'
+import mealCaloriesReducer from './mealCalories'
+import exerciseCaloriesReducer from './exerciseCalories'
 
 
 export default combineReducers({
@@ -14,5 +16,6 @@ export default combineReducers({
     exerciseEntries: exerciseEntriesReducer,
     recipes: recipesReducer,
     recipe: viewRecipeReducer,
-
+    mealCalories: mealCaloriesReducer,
+    exerciseCalories: exerciseCaloriesReducer
   })
