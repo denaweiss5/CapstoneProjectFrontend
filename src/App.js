@@ -25,7 +25,7 @@ class App extends React.Component {
     const token = localStorage.getItem("jwt_token");
 
     if (!token) {
-      this.props.history.push("/login");
+      this.props.history.push("/");
     } else {
       const reqObj = {
         method: "GET",
