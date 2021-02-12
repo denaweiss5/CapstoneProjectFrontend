@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Grid, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { viewRecipe } from "../actions/recipes";
+import { nutritionRecipe, viewRecipe } from "../actions/recipes";
 import weightEntries from "../reducers/weightEntries";
 
 import Popup from "./Popup";
@@ -65,6 +65,7 @@ class RecipeCard extends React.Component {
     )
     .then(resp => resp.json())
     .then(nutritionInfo => {
+     this.props.nutritionRecipe(nutritionInfo)
         this.setState({
             calories: nutritionInfo.calories,
             carbs: nutritionInfo.carbs,
@@ -195,7 +196,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    viewRecipe: viewRecipe
+    viewRecipe: viewRecipe, 
+    nutritionRecipe: nutritionRecipe
   };
   
 

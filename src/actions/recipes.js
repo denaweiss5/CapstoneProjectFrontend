@@ -11,3 +11,10 @@ export const viewRecipe = (recipeInfo) => {
         recipe: recipeInfo
     }
 }
+
+export const nutritionRecipe = (recipeNutritionInfo) => {
+    return {
+        type: 'NUTRITION_RECIPE',
+        recipeInfo: recipeNutritionInfo
+    }
+}

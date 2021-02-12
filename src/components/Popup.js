@@ -1,23 +1,84 @@
 import React from "react";
 import { Table, Button, Form, Input } from "semantic-ui-react";
-
+import { connect } from "react-redux";
+import {createEntry} from '../actions/mealEntries'
 
 class Popup extends React.Component{
-  constructor() {
-    
-    super();
-
+  constructor(props) {
+    super(props);
+    let today = new Date();
+    let dd = today.getDate()
+    let mm = today.getMonth()+1
+    let yyyy = today.getFullYear()
+    if(dd<10){
+        dd = '0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    const updatedDate = `${yyyy}-${mm}-${dd}`;
     this.state = {
-      name: '',
-      fat: '',
-      carbs: '',
-      protein: '',
-      calories: '',
-      date: '',
-      addMeal: true,
+      name: props.recipe.title,
+      fat: props.nutritionInfo.fat.replace('g', ''),
+      carbs: props.nutritionInfo.carbs.replace('g', ''),
+      protein: props.nutritionInfo.protein.replace('g', ''),
+      calories: props.nutritionInfo.calories.replace('g', ''),
+      date: updatedDate,
       error: ''
     };
   }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+      const name = this.state.name;
+      const fat = this.state.fat;
+      const carbs = this.state.carbs;
+      const protein = this.state.protein;
+      const calories = this.state.calories;
+      const updatedDate = parseInt(this.state.date.replace("-", "").replace("-", ""));
+      const reqObj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          fat: fat,
+          carbs: carbs,
+          protein: protein,
+          calories: calories,
+          user_id: this.props.currentUser.id,
+          date: updatedDate
+        }),
+      };
+      fetch("http://localhost:3000/meal_entries", reqObj)
+        .then((resp) => resp.json())
+        .then((newEntry) => {
+          if (newEntry.error) {
+            this.setState({
+              error: newEntry.error,
+            });
+          } else {
+            this.props.createEntry(newEntry);
+            this.props.closePopup()
+          }
+          this.setState({
+              name: '',
+              fat: '',
+              carbs: '',
+              protein: '',
+              calories: '',
+              date: ''
+          })
+          
+        });
+    };
 
   render(){
     return(
@@ -97,4 +158,17 @@ class Popup extends React.Component{
   }
 }
 
-export default Popup;
+const mapDispatchToProps = {
+  createEntry: createEntry
+};
+
+
+const mapStateToProps = (state) => {
+  return {
+    recipe: state.recipe,
+    nutritionInfo: state.nutritionInfo,
+    currentUser: state.currentUser
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Popup)

@@ -23,7 +23,6 @@ class HomePage extends React.Component {
   };
 
   render() {
-      console.log(this.props.exerciseEntries)
     let lastEntry;
     let mealName;
     let mealCals;
@@ -61,7 +60,7 @@ class HomePage extends React.Component {
       <div class="row" style={{ display: "flex" }}>
         <div className="col1">
         <Link to="/myWeightJourney">
-          <Button style={{ margin: "2em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw" }}>
             Add New Weight Entry
           </Button>
           </Link>
@@ -74,7 +73,7 @@ class HomePage extends React.Component {
         </div>
         <div className="col2">
         <Link to="/myDiaries">
-          <Button style={{ margin: "2em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw" }}>
             Add New Diary Entry
           </Button>
           </Link>
@@ -92,12 +91,12 @@ class HomePage extends React.Component {
         </div>
         <div className="col3">
         <Link to="/recipes">
-          <Button style={{ margin: "2em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw" }}>
             See All Recipes
           </Button>
           </Link>
           <br></br>
-          Suggested Recipes
+          <p style={{ fontSize: "20px" }}>Suggested Recipes</p>
           <Card style={{border: '2px solid red',   padding: "10px",
           height: '40vh',
           width: '20vw',

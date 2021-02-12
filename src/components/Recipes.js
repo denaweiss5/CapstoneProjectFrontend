@@ -50,7 +50,7 @@ class Recipes extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipeInfo) => {
-
+console.log(recipeInfo)
         this.props.viewRecipe(recipeInfo);
         this.props.history.push(`/show_recipes/${id}`);
       });
