@@ -9,7 +9,8 @@ import { connect } from "react-redux";
 class LandingPage extends React.Component{
 
     componentDidMount(){
-        if(this.props.currentUser){
+ 
+        if(localStorage.jwt_token){
             return this.props.history.push('/home')
         }
     }

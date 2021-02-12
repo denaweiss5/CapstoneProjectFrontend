@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { createUser } from '../actions/users'
-import { Form, Input } from 'semantic-ui-react'
+import { Form, Input, Button } from 'semantic-ui-react'
 
 class RegisterForm extends React.Component {
     constructor(){
@@ -87,7 +87,8 @@ class RegisterForm extends React.Component {
         onChange={this.handleChange}
         />
         </Form.Field>
-        <Form.Button content='Create account' />
+        <Button content='Create Account' onClick={this.handleSubmit}/>
+        <Button type='cancel' content='Cancel' onClick={() => this.props.history.push('/')} />
     </Form>
     </div>
    )

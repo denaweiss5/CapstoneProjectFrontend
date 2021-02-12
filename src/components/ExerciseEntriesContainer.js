@@ -5,8 +5,9 @@ import ExerciseEntry from "./ExerciseEntry";
 import { Table } from "semantic-ui-react";
 import { Button, Form, Input } from "semantic-ui-react";
 import { createEntry, totalExerciseCals } from "../actions/exerciseEntries";
+import {specifiedExercises} from '../actions/specifiedExercises'
 
-class WeightEntriesContainer extends React.Component {
+class ExerciseEntriesContainer extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -14,6 +15,7 @@ class WeightEntriesContainer extends React.Component {
       category: "",
       duration: "",
       calories_burned: "",
+      date: '',
       error: ""
     };
   }
@@ -36,6 +38,7 @@ class WeightEntriesContainer extends React.Component {
     e.preventDefault();
     const category = this.state.category;
     const duration = this.state.duration;
+    const updatedDate = parseInt(this.state.date.replace("-", "").replace("-", ""));
     const calories_burned = this.state.calories_burned;
     const reqObj = {
       method: "POST",
@@ -47,6 +50,7 @@ class WeightEntriesContainer extends React.Component {
         duration: duration,
         calories_burned: calories_burned,
         user_id: this.props.currentUser.id,
+        date: updatedDate
       }),
     };
     fetch("http://localhost:3000/exercise_entries", reqObj)
@@ -63,7 +67,8 @@ class WeightEntriesContainer extends React.Component {
         this.setState({
             category: "",
             duration: "",
-            calories_burned: ""
+            calories_burned: "",
+            date: ''
         })
       });
   };
@@ -93,6 +98,7 @@ class WeightEntriesContainer extends React.Component {
   render() {
     let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
     const entries = this.props.exerciseEntries.filter(entry => entry.date === date)
+    this.props.specifiedExercises(entries)
     const myEntry = entries.map(entry => <ExerciseEntry entry={entry} key={entry.id} />)
     return (
       <div>
@@ -150,6 +156,14 @@ class WeightEntriesContainer extends React.Component {
                   onChange={this.handleChange}
                   placeholder="calories burned"
                 ></Input>
+                     <Input
+              style={{display: 'block'}}
+              type="date"
+              name="date"
+              value={this.state.date}
+              onChange={this.handleChange}
+              placeholder="date"
+            ></Input>
                 <Button
                   type="button"
                   onClick={this.handleSubmit}
@@ -182,10 +196,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   createEntry: createEntry,
-  totalExerciseCals: totalExerciseCals
+  totalExerciseCals: totalExerciseCals,
+  specifiedExercises: specifiedExercises
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WeightEntriesContainer);
+)(ExerciseEntriesContainer);

@@ -24,24 +24,18 @@ class WeightEntry extends React.Component{
         const day = date.toString().slice(8,10)
         const updatedDate = `${month}/${day}/${year}`
         return(
-            <div >
-            <table className="ui table">
             <tbody>
-                <tr style={{
-                    textAlign: 'left',
-                    position: 'relative'
-                }}>
-                <td>{updatedDate}</td>
-                <td >{weight} lbs</td>
-               <td><button  className="ui button" onClick={() => this.handleDelete(this.props.entry.id)} style={{
-                   float: 'right'
+            <tr>
+              <td style={{fontWeight: 'lighter', fontSize: '2.5vh'}} data-label="date">{updatedDate}</td>
+              <td style={{fontWeight: 'lighter', fontSize: '2.5vh'}}data-label="Age">{weight} lbs
+              <button  className="ui button" onClick={() => this.handleDelete(this.props.entry.id)} style={{
+                   float: 'right', marginLeft: '1vh'
                }}>
                    Delete
-                   </button></td>
-                </tr>
-            </tbody>
-            </table>
-            </div>
+                   </button>
+                   </td>
+            </tr>
+          </tbody>
             
         )
     }

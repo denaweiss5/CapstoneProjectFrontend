@@ -50,6 +50,7 @@ class Recipes extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipeInfo) => {
+
         this.props.viewRecipe(recipeInfo);
         this.props.history.push(`/show_recipes/${id}`);
       });
@@ -64,9 +65,9 @@ class Recipes extends React.Component {
   
         style={{
           padding: "10px",
-          height: '70vh',
-          width: '27vw',
-          margin: "1vh",
+          height: '50vh',
+          width: '20vw',
+          margin: "1vh"
         }}
       >
         <Image
@@ -79,8 +80,7 @@ class Recipes extends React.Component {
           }}
         />
         <Card.Content>
-          <Card.Header style={{fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{title}</Card.Header>
-        {/* <p>{}recipe.calories</p> */}
+          <Card.Header style={{fontSize: '3vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{title}</Card.Header>
         </Card.Content>
       </Card>
     );
@@ -106,7 +106,7 @@ class Recipes extends React.Component {
       <div>
       
       <Button
-          onClick={() => this.props.history.goBack()}
+          onClick={() => this.props.history.push('/recipes')}
           style={{marginTop: '12vh', marginBottom: '0px', marginLeft: '3vh', float:'left'}}
         >
           Back To All Categories
@@ -131,9 +131,9 @@ class Recipes extends React.Component {
           <Button
             style={{
               float: "right",
-              marginBottom: "10px",
-              marginRight: "10px",
-              padding: "20px",
+              marginBottom: "15px",
+              marginRight: "15px",
+              padding: "15px",
             }}
             icon="angle double up"
             title="Back to top"

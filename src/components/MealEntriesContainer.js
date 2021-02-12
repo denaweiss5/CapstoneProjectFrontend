@@ -3,6 +3,8 @@ import { Table, Button, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 import MealEntry from "./MealEntry";
 import { createEntry, totalMealCals } from "../actions/mealEntries";
+import {specifiedMeals} from '../actions/specifiedMeals'
+
 
 
 
@@ -18,6 +20,7 @@ class MealEntriesContainer extends React.Component {
       carbs: '',
       protein: '',
       calories: '',
+      date: '',
       addMeal: true,
       error: ''
     };
@@ -36,13 +39,13 @@ class MealEntriesContainer extends React.Component {
   };
 
   handleSubmit = (e) => {
-  
-    const updatedDate = this.props.date
+  e.preventDefault()
     const name = this.state.name;
     const fat = this.state.fat;
     const carbs = this.state.carbs;
     const protein = this.state.protein;
     const calories = this.state.calories;
+    const updatedDate = parseInt(this.state.date.replace("-", "").replace("-", ""));
     const reqObj = {
       method: "POST",
       headers: {
@@ -61,7 +64,6 @@ class MealEntriesContainer extends React.Component {
     fetch("http://localhost:3000/meal_entries", reqObj)
       .then((resp) => resp.json())
       .then((newEntry) => {
-        console.log(newEntry)
         if (newEntry.error) {
           this.setState({
             error: newEntry.error,
@@ -76,6 +78,7 @@ class MealEntriesContainer extends React.Component {
             carbs: '',
             protein: '',
             calories: '',
+            date: ''
         })
       });
   };
@@ -101,12 +104,13 @@ class MealEntriesContainer extends React.Component {
   } else {
     return (total = 0);
   }
-  console.log(updatedCalories)
   }
 
   render() {
+
     let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
 const entries = this.props.mealEntries.filter(entry => entry.date === date)
+this.props.specifiedMeals(entries)
 const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
     return (
       <div>
@@ -181,6 +185,14 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
               onChange={this.handleChange}
               placeholder="calories"
             ></Input>
+              <Input
+              style={{display: 'block'}}
+              type="date"
+              name="date"
+              value={this.state.date}
+              onChange={this.handleChange}
+              placeholder="date"
+            ></Input>
             <Button
               type="button"
               onClick={this.handleSubmit}
@@ -212,7 +224,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     createEntry: createEntry,
-    totalMealCals: totalMealCals
+    totalMealCals: totalMealCals,
+    specifiedMeals: specifiedMeals
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MealEntriesContainer);

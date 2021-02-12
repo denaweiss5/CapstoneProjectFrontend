@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css' 
-import { Form, Input } from 'semantic-ui-react'
+import { Form, Input, Button } from 'semantic-ui-react'
 import { editUser } from '../actions/users'
 
 class AccountInfo extends React.Component{
@@ -52,9 +52,9 @@ handleSubmit = (e) => {
        
         const { name, email } = this.props.currentUser
         return (
-            <div>
+            <div className='land'>
             { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-            <Form  className='loginform' widths='equal' onSubmit={this.handleSubmit} style={{textAlign: 'left'}}>
+            <Form  className='acctform' widths='equal' style={{textAlign: 'left'}}>
             <h1>Account Info</h1>
             <br></br>
            <Form.Field >
@@ -81,8 +81,9 @@ handleSubmit = (e) => {
             onChange={this.handleChange}
             />
             </Form.Field>
-            <Form.Button content='Save changes' />
-            <Form.Button content='Cancel' />
+            <Button type='submit' content='Save changes' onClick={this.handleSubmit} />
+            <Button type='cancel' content='Cancel' onClick={() => this.props.history.push('/home')} />
+
         </Form>
       
 </div>

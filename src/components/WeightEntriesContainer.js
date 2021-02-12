@@ -13,7 +13,7 @@ class WeightEntriesContainer extends React.Component {
     this.state = {
       weight: "",
       date: "",
-      addWeight: true,
+      addWeight: false,
       error: "",
     };
   }
@@ -80,58 +80,30 @@ class WeightEntriesContainer extends React.Component {
       return (total = 0);
     }
   };
+  
+
 
   render() {
-
+const myEntry = this.props.weightEntries.map((entry) => {
+          return <WeightEntry entry={entry} key={entry.id} />;
+        })
     return (
-      <div>
-        <h1
-          style={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            marginLeft: "20%",
-          }}
-        >
-          My Weight Journey
-        </h1>
-        <div>
-          <table
-            className="ui table"
-            style={{
-              maxWidth: "600px",
-              marginLeft: "10%",
-            }}
-          >
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Weight</th>
-              </tr>
-            </thead>
-          </table>
-          <div
-            style={{
-              bottom: "0",
-              maxHeight: "300px",
-              width: "600px",
-              overflowY: "scroll",
-              padding: "none",
-              marginLeft: "10%",
-            }}
-          >
-            {this.props.weightEntries.map((entry) => {
-              return <WeightEntry entry={entry} key={entry.id} />;
-            })}
-          </div>
-          <table
-            className="ui table"
-            style={{
-              maxWidth: "600px",
-              marginLeft: "10%",
-            }}
-          >
-            <thead>
-              <tr style={{ paddingLeft: "100px" }}>
+<div style={{fontFamily: 'sans-serif', position: 'sticky', marginTop: '15vh'}}>
+  <p style={{fontSize: '3vh', fontWeight: 'lighter'}}>My Weight Journey</p>
+  <p>
+  Total Weight Lost: {this.renderTotal()} lbs
+  </p>
+   
+ 
+      <table class="ui celled table" style={{marginBottom:'5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', width: '600px'}}>
+  <thead>
+  <tr>
+    <th style={{fontWeight: 'lighter', fontSize: '3vh'}}>Date</th>
+    <th style={{fontWeight: 'lighter', fontSize: '3vh'}}>Weight</th>
+  </tr>
+  </thead>
+{myEntry}
+<tr >
                 {this.state.addWeight ? (
                   <Button
                     onClick={() => this.toggleAddWeight()}
@@ -142,12 +114,13 @@ class WeightEntriesContainer extends React.Component {
                   </Button>
                 ) : (
                   <td>
-                    <Form>
+                    <Form style={{width: '250px'}}>
                       <Input
                         type="date"
                         name="date"
                         value={this.state.date}
                         onChange={this.handleChange}
+                        style={{ display: 'inline'}}
                       ></Input>
                       <Input
                         type="number"
@@ -155,7 +128,7 @@ class WeightEntriesContainer extends React.Component {
                         value={this.state.weight}
                         onChange={this.handleChange}
                         placeholder="weight"
-                        style={{ display: "inline", width: "100px" }}
+                        style={{ display: 'inline'}}
                       ></Input>
                       <Button
                         type="button"
@@ -177,22 +150,10 @@ class WeightEntriesContainer extends React.Component {
                   </td>
                 )}
               </tr>
-              <tr>
-                <th>Total weight lost</th>
 
-                <th
-                  style={{
-                    paddingRight: "200px",
-                  }}
-                  id="total-weight"
-                >
-                  {this.renderTotal()} lbs
-                </th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-      </div>
+</table>
+</div>
+
     );
   }
 }

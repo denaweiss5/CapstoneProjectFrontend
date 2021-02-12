@@ -2,6 +2,9 @@ import React from "react";
 import { Button, Grid, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { viewRecipe } from "../actions/recipes";
+import weightEntries from "../reducers/weightEntries";
+
+import Popup from "./Popup";
 
 
 class RecipeCard extends React.Component {
@@ -12,10 +15,19 @@ class RecipeCard extends React.Component {
             calories: '',
             carbs: '',
             fat: '',
-            protein: ''
+            protein: '',
+           showPopup: false
         }
     }
-//// grab id from url and redo fetch
+
+    togglePopup = () => {
+      this.setState({
+        showPopup: !this.state.showPopup
+      })
+    }
+
+  
+
     componentDidMount(){
        const id = parseInt(this.props.match.params.id)
         if(!this.props.recipe){
@@ -61,74 +73,97 @@ class RecipeCard extends React.Component {
         })
     })
   };
+
+  
+
   render() {
-    const {
-      id,
-      image,
-      analyzedInstructions,
-      title,
-      extendedIngredients,
-      servings,
-      readyInMinutes,
-    } = this.props.recipe;
-
-
+  
     return (
+    
       <div >
+        {this.props.recipe ? 
         <div>
           <div >
-            <div >
+            <div style={{left: 0}}>
                 <Button  onClick={()=>this.props.history.goBack()}  
-                style={{marginTop: "12vh", marginBottom: '0px', marginLeft: '3vh', float: 'left'}}>Back To All Recipes</Button>
-              <div style={{ paddingTop: '120px', textAlign: 'center'}}>
-              <Grid > 
-                <Grid.Row>
-              <p style={{marginLeft:'28%'}}>{title} </p>
+                style={{ marginTop: "12vh", marginBottom: '0px', marginLeft: '3vh', float: 'left'}}>Back To All Recipes</Button>
+              <div style={{ paddingTop: '120px'}}>
+              <Grid style={{justifyContent: 'center'}}> 
+
+                <Grid.Row >
+              <p style={{ paddingRight:'20vh', fontSize: '7vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{this.props.recipe.title} </p>
+              </Grid.Row>
+              <Grid.Row >
               
               <Image
-                src={image}
+                src={this.props.recipe.image}
                 style={{
-                  paddingLeft: '2vh',
-                  display: 'block',
+                  height: 'auto',
+                  width: 'auto',
+                  display: 'inline',
                   marginLeft: 'auto',
                   marginRight: 'auto'
                 }}
               />
-              
-              </Grid.Row>
-              <Grid.Row style={{display: 'block', marginLeft: '90vh'}}>
-              <div style={{  border: '2px solid black', textAlign:'center', width:'300px', backgroundColor: 'white', color: 'black', }}>
-            <p>Total Time: {readyInMinutes} min</p>
-            <p>servings: {servings}</p>
-           
+              <div style={{marginRight:'22vh', justifyContent: 'center', height: '51vh'}}>
+              <Button style={{ color: 'purple', marginBottom: '2vh'}} onClick={this.togglePopup}>Add this recipe to your meal diary?</Button>
+              {this.state.showPopup ? 
+              <Popup 
+              closePopup={this.togglePopup}
+                />
+                :
+                null
+            }
+              <div style={{ marginBottom:'1vh', padding: '1vh', justifyContent:'center', border: '1px dotted black',  textAlign:'center',  height:'22vh',  color: 'black', fontSize:'1.8vh'}}>
+            <p>Ready In: {this.props.recipe.readyInMinutes} Min</p>
+            <p>Servings: {this.props.recipe.servings}</p>
+    <p>Health Score: {this.props.recipe.healthScore}</p>
+    <p>Weight Watcher Smart Points: {this.props.recipe.weightWatcherSmartPoints}</p>
+    
+    {this.props.recipe.diets.map(diet => {
+              return <p style={{display: 'inline'}}>{this.props.recipe.diet}. </p>
+            })}
+    
+              </div>
+              <div >
+              <Grid.Row>
+              <div style={{ padding: '1vh',   display:'inline', float: 'left', border: '1px dotted black',  textAlign:'center',  height:'21.8vh', width:'100%',  color: 'black', fontSize:'2vh'}}>
+                  <p style={{  fontSize:'2vh'}} >Nutrion Facts</p>
+                  <p>{this.renderNutrition(this.props.recipe.id)}</p>
+                    <p style={{  fontSize:'1.8vh'}} >Calories: {this.state.calories}</p>
+                    <p style={{  fontSize:'1.8vh'}}>Carbs: {this.state.carbs}</p>
+                    <p style={{  fontSize:'1.8vh'}}>Fat: {this.state.fat}</p>
+                    <p style={{  fontSize:'1.8vh'}}>Protein: {this.state.protein}</p>
+                </div>
+                
+                </Grid.Row>
+              </div>
               </div>
               </Grid.Row>
-              <br></br>
-              
               </Grid>
               </div>
-            
-            
-
-            <div class="ui hidden divider"></div>
-            <div class="ui grid">
-              <div class="two column row">
-                <div class="column">
-                  <h1 style={{ marginRight:'400px', fontSize:'25px' }} class="ui header">Ingredients</h1>
+              
+        
+        
+     <Grid>
+       <Grid.Row>
+         <div style={{ display: 'flex',  justifyContent: 'center', height: '100%', paddingTop:'5vh'}}>
+                <div style={{ borderBottom: '1px outset grey', textAlign: 'center', display: 'inline',  margin: '1vh',  width: '40%', overflowY: 'scroll', msOverflowStyle: 'hidden'}}>
+                  <p style={{fontSize: '3vh'}}>Ingredients</p>
                   <p>
-                    <ul style={{ textAlign: "left", fontSize:'20px' }}>
-                      {extendedIngredients.map((ing) => {
+                    <ul style={{ textAlign: 'center', fontSize:'2.5vh', listStyleType: 'none'}}>
+                      {this.props.recipe.extendedIngredients.map((ing) => {
                         return <li>{ing.original}</li>;
                       })}
                     </ul>
                   </p>
                 </div>
-                <div class="column">
-                  <h1 style={{ marginRight:'400px', fontSize:'25px' }} class="ui header">Directions</h1>
+                <div style={{ borderBottom: '1px outset grey', display: 'inline',  margin: '1vh', width: '40%', overflowY: 'scroll'}}>
+                  <p style={{fontSize: '3vh'}}>Directions</p>
                   <p>
-                    <ol style={{ textAlign: "left", fontSize:'20px'  }}>
-                      {analyzedInstructions[0] ? 
-                      analyzedInstructions[0].steps.map((step) => {
+                    <ol style={{ textAlign: "left", fontSize:'2.5vh'  }}>
+                      {this.props.recipe.analyzedInstructions[0] ? 
+                      this.props.recipe.analyzedInstructions[0].steps.map((step) => {
                         return <li>{step.step}</li>;
                       }) : 
                         <li>Sorry, but at this time we are still gathering the directions.</li>
@@ -136,23 +171,18 @@ class RecipeCard extends React.Component {
                     </ol>
                   </p>
                 </div>
-              </div>
-              <div >
-                <div class="column" style={{marginLeft:'50px'}}>
-                  <h1 style={{  fontSize:'25px' }} class="ui header">Nutrion Facts</h1>
-                  <p>{this.renderNutrition(id)}</p>
-                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }} >Calories: {this.state.calories}</h3>
-                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Carbs: {this.state.carbs}</h3>
-                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Fat: {this.state.fat}</h3>
-                    <h3 style={{  fontSize:'20px', fontFamily: "serif" }}>Protein: {this.state.protein}</h3>
                 </div>
-              </div>
-            </div>
+                </Grid.Row>
+                </Grid>
+              
+           
             <div class="ui hidden divider"></div>
             <div class="ui divider"></div>
           </div>
         </div>
       </div>
+      : 
+      null }
       </div>
     );
   }

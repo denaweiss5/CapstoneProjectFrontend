@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { loginSuccess } from '../actions/auth'
-import { Form, Input, Message } from 'semantic-ui-react'
+import { Form, Input, Button } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css' 
 
 class LoginForm extends React.Component {
@@ -45,7 +45,6 @@ class LoginForm extends React.Component {
               })
           } else {
               localStorage.setItem('jwt_token', data.jwt_token)
-              /// store token in local storage- store of memory that persists across refreshes
               this.props.loginSuccess(data.user)
               this.props.history.push('/home')
           }
@@ -57,7 +56,7 @@ class LoginForm extends React.Component {
     return(
       <div className='land'>
       { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-      <Form  className='loginform' widths='equal' onSubmit={this.handleSubmit}>
+      <Form  className='loginform' widths='equal' >
         <h1>Sign in</h1>
         <br></br>
        <Form.Field required>
@@ -79,7 +78,8 @@ class LoginForm extends React.Component {
         onChange={this.handleChange}
         />
         </Form.Field>
-        <Form.Button content='Sign In' />
+        <Button content='Sign In' onClick={this.handleSubmit}/>
+        <Button type='cancel' content='Cancel' onClick={() => this.props.history.push('/')} />
     </Form>
     </div>
    )

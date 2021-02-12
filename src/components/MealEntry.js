@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 class MealEntry extends React.Component{
 
     render(){
+  
         const { calories, name, fat, protein, carbs } = this.props.entry
         return(
            

@@ -11,7 +11,7 @@ class RecipesContainer extends React.Component{
 
     renderRecipes = (e) => {
         const query = e.target.innerText
-        fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=25&query=${query}`, {
+        fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=36&query=${query}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
@@ -34,36 +34,36 @@ class RecipesContainer extends React.Component{
 
         return (
 
-            <div>
+            <div >
                  
-                <Grid className='recipesgrid'>
+                <Grid >
                 <Grid.Row  columns={4}>
                 <Grid.Column >
-                <Button color='white' size='massive' content='Low Calories' style={{ border: '3px solid rgb(202, 49, 49)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid' size='massive' content='Low Calorie' style={{ border: '3px solid rgb(202, 49, 49)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(202, 49, 49)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Low Carbs' style={{ border: '3px solid rgb(179, 50, 168)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='Low Carb' style={{  border: '3px solid rgb(179, 50, 168)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(179, 50, 168)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Low Fat' style={{border: '3px solid rgb(121, 50, 179)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='Low Fat' style={{ border: '3px solid rgb(121, 50, 179)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(121, 50, 179)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='High Protein' style={{ border: '3px solid rgb(47, 47, 209)',height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='High Protein' style={{ border: '3px solid rgb(47, 47, 209)',height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(47, 47, 209)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 </Grid.Row>
                 <Grid.Row  columns={4}>
                
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Vegan' style={{border: `3px solid rgb(202, 49, 49)`, height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'   size='massive' content='Vegan' style={{border: `3px solid rgb(202, 49, 49)`, height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(202, 49, 49)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Vegetarian' style={{border: '3px solid rgb(179, 50, 168)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='Vegetarian' style={{border: '3px solid rgb(179, 50, 168)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(179, 50, 168)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Gluten Free' style={{border: '3px solid rgb(121, 50, 179)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='Gluten Free' style={{border: '3px solid rgb(121, 50, 179)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(121, 50, 179)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 <Grid.Column>
-                <Button  color='white' size='massive' content='Dairy Free' style={{border: '3px solid rgb(47, 47, 209)', height:'21vh', width:'13vw', color: 'black'}} onClick={this.renderRecipes}/>
+                <Button className='recipesgrid'  size='massive' content='Dairy Free' style={{border: '3px solid rgb(47, 47, 209)', height:'28vh', width:'18vw', color: 'black', backgroundColor: 'white', boxShadow: '10px 10px 8px rgb(47, 47, 209)'}} onClick={this.renderRecipes}/>
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
