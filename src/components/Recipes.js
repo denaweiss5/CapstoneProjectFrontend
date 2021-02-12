@@ -123,11 +123,17 @@ console.log(recipeInfo)
       
           <Grid >
             <Grid.Row >
-              {this.props.recipes.map((recipe) => {
+              
+              {this.props.recipes.length > 0 ?
+              this.props.recipes.map((recipe) => {
                 return this.renderCard(recipe);
-              })}
+              })
+              :
+              <p>No Recipes Found. Please Consider Searching For New Ones</p>
+            }
             </Grid.Row>
           </Grid>
+          {this.props.recipes.length > 0 ?
           <Button
             style={{
               float: "right",
@@ -142,6 +148,8 @@ console.log(recipeInfo)
               this.scrollToTop();
             }}
           ></Button>
+    :
+    null}
         </div>
       </div>
     );

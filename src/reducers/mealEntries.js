@@ -9,6 +9,9 @@ const mealEntries = (state = [], action) => {
     case "CREATE_ENTRY":
       updatedMealEntries = [...state, action.entry];
       return updatedMealEntries;
+      case 'DELETE_ENTRY':
+        updatedMealEntries = state.filter(entry => entry.id !== action.id)
+        return updatedMealEntries
     default:
       return state;
   }

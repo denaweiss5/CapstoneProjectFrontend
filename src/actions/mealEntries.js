@@ -11,3 +11,10 @@ export const totalMealCals = (mealCals) => {
         calories: mealCals
     }
 }
+
+export const deleteEntry = (id) => {
+    return {
+        type: 'DELETE_ENTRY',
+        id: id
+    }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button, Form, Input } from "semantic-ui-react";
+import {  Button, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {createEntry} from '../actions/mealEntries'
 
@@ -34,6 +34,8 @@ class Popup extends React.Component{
     });
   };
 
+ 
+
   handleSubmit = (e) => {
     e.preventDefault()
       const name = this.state.name;
@@ -65,6 +67,7 @@ class Popup extends React.Component{
               error: newEntry.error,
             });
           } else {
+            this.props.showMessage();
             this.props.createEntry(newEntry);
             this.props.closePopup()
           }
@@ -84,8 +87,8 @@ class Popup extends React.Component{
     return(
       <div className='popup'>  
 <div className='popup\_inner'> 
-<h1>Add new meal</h1> 
-<Form style={{}}>
+
+<Form style={{marginTop:'8vh'}}>
             <Input
              style={{display: 'block', width:'75%', marginLeft: '12%'}}
               type="text"

@@ -10,7 +10,9 @@ const exerciseEntries = (state = [], action) => {
     case "CREATE_ENTRY":
       updatedExerciseEntries = [...state, action.entry];
       return updatedExerciseEntries;
-
+      case 'DELETE_ENTRY':
+        updatedExerciseEntries = state.filter(entry => entry.id !== action.id)
+        return updatedExerciseEntries
     default:
       return state;
   }

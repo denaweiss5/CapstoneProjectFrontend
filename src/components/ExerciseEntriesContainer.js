@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "semantic-ui-css/semantic.min.css";
 import ExerciseEntry from "./ExerciseEntry";
 import { Table } from "semantic-ui-react";
-import { Button, Form, Input } from "semantic-ui-react";
+import { Button, Form, Input, Message } from "semantic-ui-react";
 import { createEntry, totalExerciseCals } from "../actions/exerciseEntries";
 import {specifiedExercises} from '../actions/specifiedExercises'
 
@@ -12,6 +12,7 @@ class ExerciseEntriesContainer extends React.Component {
     super();
     this.state = {
       addExercise: true,
+      showMessage: false,
       category: "",
       duration: "",
       calories_burned: "",
@@ -26,6 +27,15 @@ class ExerciseEntriesContainer extends React.Component {
     });
   };
 
+
+  showMessage = () => {
+    this.setState({
+      showMessage: true
+    })
+    setTimeout(()=> {
+      this.setState({ showMessage: false})
+    }, 3000)
+  }
 
 
   handleChange = (e) => {
@@ -63,6 +73,7 @@ class ExerciseEntriesContainer extends React.Component {
         } else {
           this.toggleAddExercise();
           this.props.createEntry(newEntry);
+          this.showMessage();
         }
         this.setState({
             category: "",
@@ -103,7 +114,13 @@ class ExerciseEntriesContainer extends React.Component {
     return (
       <div>
     { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-
+    {this.state.showMessage ?
+                     <Message
+                     success
+                     header='Your Exercise Submission Was Successful!'
+                   />
+                  : 
+                  null}
         <Table singleLine >
           <Table.Header>
             <Table.Row >

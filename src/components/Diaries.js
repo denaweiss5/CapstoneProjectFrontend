@@ -11,6 +11,8 @@ import {
 } from "semantic-ui-react";
 
 import MealEntriesContainer from "./MealEntriesContainer";
+import { totalExerciseCals } from "../actions/exerciseEntries";
+import { totalMealCals } from "../actions/mealEntries";
 
 
 
@@ -45,11 +47,26 @@ handleChange = (e) => {
 
 
   render() {
-
+let totalExerciseCals;
+let totalMealCals;
 const exerciseCals = this.props.specificExercises.map(exercise => exercise.calories_burned)
+console.log(exerciseCals)
 const mealCals = this.props.specificMeals.map(exercise => exercise.calories)
-const totalExerciseCals = exerciseCals.reduce((a,b) => a + b, 0)
-const totalMealCals = mealCals.reduce((a,b) => a + b, 0)
+if (exerciseCals.length > 1){
+     totalExerciseCals = exerciseCals.reduce((a,b) => a + b, 0)
+} else if(exerciseCals.length = 1){
+    totalExerciseCals = exerciseCals
+} else {
+    totalExerciseCals = 0
+}
+if (mealCals.length > 1){
+    totalMealCals = mealCals.reduce((a,b) => a + b, 0)
+} else if(mealCals.length = 1){
+    totalMealCals = mealCals
+} else {
+    totalMealCals = 0
+}
+
 const totalCals = (totalMealCals - totalExerciseCals).toFixed(1)
 
     return (

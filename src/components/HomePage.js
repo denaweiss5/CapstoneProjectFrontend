@@ -30,26 +30,30 @@ class HomePage extends React.Component {
     let exerciseCals;
     if (this.props.currentUser) {
         let weights = this.props.weightEntries.map((entry) =>  entry.weight)
-        lastEntry = weights[weights.length-1]
+        if (weights.length> 0){
+          lastEntry = weights[weights.length-1]
+        } else {
+          lastEntry = 0
+        }
     } else {
         lastEntry = 0
     }
-    if (this.props.currentUser) {
+    if (this.props.currentUser && this.props.mealEntries.length > 0) {
       mealName = this.props.mealEntries.slice(-1)[0].name;
     } else {
       mealName = 'No Meal Yet';
     }
-    if (this.props.currentUser) {
+    if (this.props.currentUser && this.props.mealEntries.length > 0) {
       mealCals = this.props.mealEntries.slice(-1)[0].calories;
     } else {
       mealCals = 0;
     }
-    if (this.props.currentUser) {
+    if (this.props.currentUser && this.props.exerciseEntries.length > 0) {
       exerciseName = this.props.exerciseEntries.slice(-1)[0].category;
     } else {
       exerciseName = 'No Activity Yet';
     }
-    if (this.props.currentUser) {
+    if (this.props.currentUser && this.props.exerciseEntries.length > 0) {
      exerciseCals = this.props.exerciseEntries.slice(-1)[0]
         .calories_burned;
     } else {
@@ -60,7 +64,7 @@ class HomePage extends React.Component {
       <div class="row" style={{ display: "flex" }}>
         <div className="col1">
         <Link to="/myWeightJourney">
-          <Button style={{ margin: "1em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw", color:'rgb(202, 49, 49)' }}>
             Add New Weight Entry
           </Button>
           </Link>
@@ -73,7 +77,7 @@ class HomePage extends React.Component {
         </div>
         <div className="col2">
         <Link to="/myDiaries">
-          <Button style={{ margin: "1em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw", color:'rgb(158, 65, 161)' }}>
             Add New Diary Entry
           </Button>
           </Link>
@@ -82,16 +86,16 @@ class HomePage extends React.Component {
           <p style={{ fontSize: "27px" }}>
             {mealName}: {mealCals} calories
           </p>
-          <i style={{ marginBottom: ".5em" }} class=" huge utensils icon"></i>
+          <i style={{ margin: ".5em" }} class=" big utensils icon"></i>
           <p style={{ fontSize: "20px" }}>My Last Activity</p>
           <p style={{ fontSize: "27px" }}>
             {exerciseName}: {exerciseCals} calories burned
           </p>
-          <i style={{ marginBottom: ".5em" }} class=" huge bicycle icon"></i>
+          <i style={{ margin: ".5em" }} class=" big bicycle icon"></i>
         </div>
         <div className="col3">
         <Link to="/recipes">
-          <Button style={{ margin: "1em", width: "20vw" }}>
+          <Button style={{ margin: "1em", width: "20vw", color:'rgb(47, 47, 209)' }}>
             See All Recipes
           </Button>
           </Link>

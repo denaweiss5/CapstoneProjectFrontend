@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import MealEntry from "./MealEntry";
 import { createEntry, totalMealCals } from "../actions/mealEntries";
 import {specifiedMeals} from '../actions/specifiedMeals'
-
+import { Popup, Message } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,6 +23,7 @@ class MealEntriesContainer extends React.Component {
       calories: '',
       date: '',
       addMeal: true,
+      showMessage: false,
       error: ''
     };
   }
@@ -37,6 +39,15 @@ class MealEntriesContainer extends React.Component {
       [e.target.name]: e.target.value,
     });
   };
+
+  showMessage = () => {
+    this.setState({
+      showMessage: true
+    })
+    setTimeout(()=> {
+      this.setState({ showMessage: false})
+    }, 3000)
+  }
 
   handleSubmit = (e) => {
   e.preventDefault()
@@ -70,6 +81,7 @@ class MealEntriesContainer extends React.Component {
           });
         } else {
           this.toggleAddMeal();
+          this.showMessage()
           this.props.createEntry(newEntry);
         }
         this.setState({
@@ -115,6 +127,13 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
     return (
       <div>
                   { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+                  {this.state.showMessage ?
+                     <Message
+                     success
+                     header='Your Meal Submission Was Successful!'
+                   />
+                  : 
+                  null}
         <Table>
           <Table.Header>
             <Table.Row>
@@ -126,7 +145,6 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
             </Table.Row>
           </Table.Header>
           {myEntry}
-    
           <Table.Row >
             <Table.Cell>Total Calories Burned</Table.Cell>
             <Table.Cell></Table.Cell>
@@ -137,12 +155,16 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
         </Table>
       
         {this.state.addMeal ? 
+        <Popup flowing hoverable trigger={
               <Button
               style={{ marginLeft: "25px" }}
               onClick={this.toggleAddMeal}
             >
               Add
             </Button>
+            } >
+              <p>You can easily add a meal to your diary from our recipes <Link to='/recipes'>here</Link>!</p>
+            </Popup>
             :
             <Form>
             <Input

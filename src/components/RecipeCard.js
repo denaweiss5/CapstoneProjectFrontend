@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Card, Icon, Image, ModalDescription } from "semantic-ui-react";
+import { Button, Grid, Card, Icon, Image, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { nutritionRecipe, viewRecipe } from "../actions/recipes";
 import weightEntries from "../reducers/weightEntries";
@@ -16,7 +16,8 @@ class RecipeCard extends React.Component {
             carbs: '',
             fat: '',
             protein: '',
-           showPopup: false
+           showPopup: false,
+           showMessage: false
         }
     }
 
@@ -26,6 +27,14 @@ class RecipeCard extends React.Component {
       })
     }
 
+    showMessage = () => {
+      this.setState({
+        showMessage: true
+      })
+      setTimeout(()=> {
+        this.setState({ showMessage: false})
+      }, 3000)
+    }
   
 
     componentDidMount(){
@@ -92,6 +101,14 @@ class RecipeCard extends React.Component {
               <Grid style={{justifyContent: 'center'}}> 
 
                 <Grid.Row >
+                {this.state.showMessage ?
+                     <Message
+                     style={{fontSize: '2vh'}}
+                     success
+                     header='Your Meal Submission Was Successful!'
+                   />
+                  : 
+                  null}
               <p style={{ paddingRight:'20vh', fontSize: '7vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{this.props.recipe.title} </p>
               </Grid.Row>
               <Grid.Row >
@@ -111,6 +128,7 @@ class RecipeCard extends React.Component {
               {this.state.showPopup ? 
               <Popup 
               closePopup={this.togglePopup}
+              showMessage={this.showMessage}
                 />
                 :
                 null
@@ -122,7 +140,7 @@ class RecipeCard extends React.Component {
     <p>Weight Watcher Smart Points: {this.props.recipe.weightWatcherSmartPoints}</p>
     
     {this.props.recipe.diets.map(diet => {
-              return <p style={{display: 'inline'}}>{this.props.recipe.diet}. </p>
+              return <p style={{display: 'inline'}}>{diet}. </p>
             })}
     
               </div>
@@ -148,8 +166,8 @@ class RecipeCard extends React.Component {
         
      <Grid>
        <Grid.Row>
-         <div style={{ display: 'flex',  justifyContent: 'center', height: '100%', paddingTop:'5vh'}}>
-                <div style={{ borderBottom: '1px outset grey', textAlign: 'center', display: 'inline',  margin: '1vh',  width: '40%', overflowY: 'scroll', msOverflowStyle: 'hidden'}}>
+         <div style={{ display: 'flex',  justifyContent: 'center', height: '80vh', paddingTop:'5vh'}}>
+                <div style={{ textAlign: 'center', display: 'inline',  margin: '1vh',  width: '40%', overflowY: 'scroll', msOverflowStyle: 'hidden'}}>
                   <p style={{fontSize: '3vh'}}>Ingredients</p>
                   <p>
                     <ul style={{ textAlign: 'center', fontSize:'2.5vh', listStyleType: 'none'}}>
@@ -159,7 +177,7 @@ class RecipeCard extends React.Component {
                     </ul>
                   </p>
                 </div>
-                <div style={{ borderBottom: '1px outset grey', display: 'inline',  margin: '1vh', width: '40%', overflowY: 'scroll'}}>
+                <div style={{ display: 'inline',  margin: '1vh', width: '40%', overflowY: 'scroll'}}>
                   <p style={{fontSize: '3vh'}}>Directions</p>
                   <p>
                     <ol style={{ textAlign: "left", fontSize:'2.5vh'  }}>

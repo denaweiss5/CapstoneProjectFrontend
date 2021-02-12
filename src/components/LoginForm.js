@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
   render(){
     return(
       <div className='land'>
-      { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+      { this.state.error ? <h4 style={{color: 'white'}}>{this.state.error}</h4> : null}
       <Form  className='loginform' widths='equal' >
         <h1>Sign in</h1>
         <br></br>
