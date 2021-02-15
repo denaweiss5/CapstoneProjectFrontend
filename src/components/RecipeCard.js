@@ -3,6 +3,7 @@ import { Button, Grid, Card, Icon, Image, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { nutritionRecipe, viewRecipe } from "../actions/recipes";
 import weightEntries from "../reducers/weightEntries";
+import {createEntry} from '../actions/favoriteRecipes'
 
 import Popup from "./Popup";
 
@@ -19,6 +20,61 @@ class RecipeCard extends React.Component {
            showPopup: false,
            showMessage: false
         }
+    }
+
+    favoriteRecipe = (e) => {
+    e.preventDefault()
+
+      const name = this.props.recipe.title
+      const image = this.props.recipe.image
+      const ingredients = this.props.recipe.extendedIngredients.map(ing => {
+        return ing.original
+      })
+      const directions = this.props.recipe.analyzedInstructions[0] ? 
+       this.props.recipe.analyzedInstructions[0].steps.map(step => {
+         return step.steps
+       }) : 'Sorry, but at this time we are still gathering the directions.'
+       const fat = this.state.fat
+       const calories = this.state.calories
+       const carbs = this.state.carbs
+       const protein = this.state.protein
+       const reqObj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          image: image,
+          ingredients: ingredients,
+          directions: directions,
+          fat: fat,
+          carbs: carbs,
+          protein: protein,
+          calories: calories,
+          user_id: this.props.currentUser.id
+        }),
+      };
+      fetch("http://localhost:3000/recipes", reqObj)
+        .then((resp) => resp.json())
+        .then((newEntry) => {
+          if (newEntry.error) {
+            this.setState({
+              error: newEntry.error,
+            });
+          } else {
+            this.props.createEntry(newEntry);
+
+          }
+          this.setState({
+              name: '',
+              fat: '',
+              carbs: '',
+              protein: '',
+              calories: ''
+          })
+          
+        });
     }
 
     togglePopup = () => {
@@ -125,6 +181,7 @@ class RecipeCard extends React.Component {
               />
               <div style={{marginRight:'22vh', justifyContent: 'center', height: '51vh'}}>
               <Button style={{ color: 'purple', marginBottom: '2vh'}} onClick={this.togglePopup}>Add this recipe to your meal diary?</Button>
+              <Button icon='heart' onClick={this.favoriteRecipe}></Button>
               {this.state.showPopup ? 
               <Popup 
               closePopup={this.togglePopup}
@@ -210,12 +267,14 @@ class RecipeCard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     recipe: state.recipe,
+    currentUser: state.currentUser
   };
 };
 
 const mapDispatchToProps = {
     viewRecipe: viewRecipe, 
-    nutritionRecipe: nutritionRecipe
+    nutritionRecipe: nutritionRecipe,
+    createEntry: createEntry
   };
   
 

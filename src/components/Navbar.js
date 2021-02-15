@@ -53,9 +53,20 @@ class Navbar extends React.Component{
               <Menu.Item as="a" style={{marginTop: '10px'}} >My Habits</Menu.Item>
               </Link>
               <Menu.Menu position="right">
-              <Link to='/recipes'>
-                <Menu.Item as="a" style={{marginTop: '10px'}} >Recipes</Menu.Item>
-                </Link>
+              <Dropdown item text="Recipes">
+                <Dropdown.Menu>
+                <Link to='/recipes'>
+                  <Dropdown.Item as="a" >
+                    Find Recipes
+                  </Dropdown.Item>
+                  </Link>
+                  <Link to='/favorite_recipes'>
+                  <Dropdown.Item as="a" >
+                    My favorites
+                  </Dropdown.Item>
+                  </Link>
+                </Dropdown.Menu>
+              </Dropdown>
                 <Menu.Item>
              <SearchBar history={history}/>
            </Menu.Item>

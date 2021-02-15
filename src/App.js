@@ -17,6 +17,8 @@ import history from "./history";
 import MealEntriesContainer from "./components/MealEntriesContainer";
 import { connect } from "react-redux";
 import { currentUser } from "./actions/auth";
+import FavoriteRecipes from "./components/FavoriteRecipes";
+
 
 
 
@@ -68,7 +70,7 @@ class App extends React.Component {
                 path="/all_recipes/:category"
               />
               <Route component={RecipeCard} path="/show_recipes/:id" />
-  
+              <Route component={FavoriteRecipes} path="/favorite_recipes" />
                 <Route component={LandingPage} path="/" />
               
               <Route

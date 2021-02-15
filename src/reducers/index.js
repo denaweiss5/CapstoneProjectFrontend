@@ -10,6 +10,7 @@ import exerciseCaloriesReducer from './exerciseCalories'
 import specificMealsReducer from './specificMeals'
 import specificExercisesReducer from './specificExercises'
 import nutritionInfoReducer from './nutritionInfo'
+import favoriteRecipeReducer from './favoriteRecipe'
 
 export default combineReducers({
     currentUser: currentUserReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
     exerciseCalories: exerciseCaloriesReducer,
     specificMeals: specificMealsReducer,
     specificExercises: specificExercisesReducer,
-    nutritionInfo: nutritionInfoReducer
+    nutritionInfo: nutritionInfoReducer,
+    favoriteRecipe: favoriteRecipeReducer
   })
