@@ -41,7 +41,7 @@ const LineGraph = (props) => {
               pointHoverBackgroundColor: 'purple',
               pointHoverBorderColor: 'rgba(220,220,220,1)',
               pointHoverBorderWidth: 2,
-              pointRadius: 6,
+              pointRadius: 0,
               pointHitRadius: 10,
               borderWidth: 4
             }

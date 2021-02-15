@@ -11,6 +11,7 @@ import specificMealsReducer from './specificMeals'
 import specificExercisesReducer from './specificExercises'
 import nutritionInfoReducer from './nutritionInfo'
 import favoriteRecipeReducer from './favoriteRecipe'
+import randomRecipeReducer from './randomRecipe'
 
 export default combineReducers({
     currentUser: currentUserReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
     specificMeals: specificMealsReducer,
     specificExercises: specificExercisesReducer,
     nutritionInfo: nutritionInfoReducer,
-    favoriteRecipe: favoriteRecipeReducer
+    favoriteRecipe: favoriteRecipeReducer,
+    randomRecipe: randomRecipeReducer
   })

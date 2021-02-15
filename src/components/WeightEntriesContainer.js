@@ -112,9 +112,7 @@ const myEntry = this.props.weightEntries.map((entry) => {
   </p>
 <div style={{height: '100%', width: '100%', fontFamily: 'sans-serif', display: 'flex', marginTop: '5vh', bottom: 0}}>
 
-  <div style={{ flex : 1, margin:'10vh', padding:'5px'}}>
-  <LineGraph/>
-  </div>
+
   <div style={{flex : 1, margin: '10px'}}>
 
   {this.state.showMessage ?
@@ -185,6 +183,9 @@ const myEntry = this.props.weightEntries.map((entry) => {
 
 </table>
 </div>
+<div style={{ flex : 1, margin:'10vh', padding:'5px'}}>
+  <LineGraph/>
+  </div>
 </div>
 </div>
     );

@@ -167,7 +167,7 @@ class RecipeCard extends React.Component {
           <div >
             <div style={{left: 0}}>
                 <Button  onClick={()=>this.props.history.goBack()}  
-                style={{ marginTop: "12vh", marginBottom: '0px', marginLeft: '3vh', float: 'left'}}>Back To All Recipes</Button>
+                style={{ marginTop: "12vh", marginBottom: '0px', marginLeft: '3vh', float: 'left'}}>Go Back</Button>
               <div style={{ paddingTop: '120px'}}>
               <Grid style={{justifyContent: 'center'}}> 
 

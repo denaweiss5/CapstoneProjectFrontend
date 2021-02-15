@@ -18,3 +18,10 @@ export const nutritionRecipe = (recipeNutritionInfo) => {
         recipeInfo: recipeNutritionInfo
     }
 }
+
+export const randomRecipe = (recipeInfo) => {
+    return {
+        type: 'RANDOM_RECIPE',
+        randomRecipe: recipeInfo
+    }
+}
