@@ -8,7 +8,7 @@ import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import WeightEntriesContainer from "./components/WeightEntriesContainer";
 import Diaries from "./components/Diaries";
-import Habits from "./components/Habits";
+
 import RecipesContainer from "./components/RecipesContainer";
 import AccountInfo from "./components/AccountInfo";
 import Recipes from "./components/Recipes";
@@ -60,7 +60,6 @@ class App extends React.Component {
                 path="/myWeightJourney"
               />
               <Route component={Diaries} path="/myDiaries" />
-              <Route component={Habits} path="/myHabits" />
               <Route
                 component={(props) => <RecipesContainer {...props} />}
                 path="/recipes"

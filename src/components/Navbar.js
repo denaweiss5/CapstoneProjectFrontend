@@ -49,9 +49,7 @@ class Navbar extends React.Component{
               <Link to='/myDiaries'>
               <Menu.Item as="a" style={{marginTop: '10px'}} >My Diaries</Menu.Item>
               </Link>
-              <Link to='/myHabits'>
-              <Menu.Item as="a" style={{marginTop: '10px'}} >My Habits</Menu.Item>
-              </Link>
+            
               <Menu.Menu position="right">
               <Dropdown item text="Recipes">
                 <Dropdown.Menu>
@@ -62,7 +60,7 @@ class Navbar extends React.Component{
                   </Link>
                   <Link to='/favorite_recipes'>
                   <Dropdown.Item as="a" >
-                    My favorites
+                    My Favorites
                   </Dropdown.Item>
                   </Link>
                 </Dropdown.Menu>

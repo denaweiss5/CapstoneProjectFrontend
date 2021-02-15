@@ -18,64 +18,70 @@ class RecipeCard extends React.Component {
             fat: '',
             protein: '',
            showPopup: false,
-           showMessage: false
+           showMessage: false,
+           showFavoritesMessage: false
         }
     }
 
     favoriteRecipe = (e) => {
     e.preventDefault()
 
-      const name = this.props.recipe.title
-      const image = this.props.recipe.image
-      const ingredients = this.props.recipe.extendedIngredients.map(ing => {
-        return ing.original
-      })
-      const directions = this.props.recipe.analyzedInstructions[0] ? 
-       this.props.recipe.analyzedInstructions[0].steps.map(step => {
-         return step.steps
-       }) : 'Sorry, but at this time we are still gathering the directions.'
-       const fat = this.state.fat
-       const calories = this.state.calories
-       const carbs = this.state.carbs
-       const protein = this.state.protein
-       const reqObj = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          image: image,
-          ingredients: ingredients,
-          directions: directions,
-          fat: fat,
-          carbs: carbs,
-          protein: protein,
-          calories: calories,
-          user_id: this.props.currentUser.id
-        }),
-      };
-      fetch("http://localhost:3000/recipes", reqObj)
-        .then((resp) => resp.json())
-        .then((newEntry) => {
-          if (newEntry.error) {
-            this.setState({
-              error: newEntry.error,
-            });
-          } else {
-            this.props.createEntry(newEntry);
-
-          }
+    const name = this.props.recipe.title
+    const image = this.props.recipe.image
+    const ingredients = this.props.recipe.extendedIngredients.map(ing => {
+      return ing.original
+    })
+    const recipe_id = parseInt(this.props.recipe.id)
+    const directions = this.props.recipe.analyzedInstructions[0] ? 
+     this.props.recipe.analyzedInstructions[0].steps.map(step => {
+       return step.steps
+     }) : 'Sorry, but at this time we are still gathering the directions.'
+     const fat = this.state.fat
+     const calories = this.state.calories
+     const carbs = this.state.carbs
+     const protein = this.state.protein
+     const reqObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        image: image,
+        ingredients: ingredients,
+        directions: directions,
+        recipe_id: recipe_id,
+        fat: fat,
+        carbs: carbs,
+        protein: protein,
+        calories: calories,
+        user_id: this.props.currentUser.id
+      }),
+    };
+    fetch("http://localhost:3000/recipes", reqObj)
+      .then((resp) => resp.json())
+      .then((newEntry) => {
+        if (newEntry.error) {
           this.setState({
-              name: '',
-              fat: '',
-              carbs: '',
-              protein: '',
-              calories: ''
-          })
-          
-        });
-    }
+            error: newEntry.error,
+          });
+        } else {
+          this.showFavoritesMessage()
+          this.props.createEntry(newEntry);
+
+        }
+        this.setState({
+            name: '',
+            fat: '',
+            carbs: '',
+            protein: '',
+            calories: ''
+        })
+        
+      });
+  }
+
+     
 
     togglePopup = () => {
       this.setState({
@@ -89,6 +95,15 @@ class RecipeCard extends React.Component {
       })
       setTimeout(()=> {
         this.setState({ showMessage: false})
+      }, 3000)
+    }
+
+    showFavoritesMessage = () => {
+      this.setState({
+        showFavoritesMessage: true
+      })
+      setTimeout(()=> {
+        this.setState({ showFavoritesMessage: false})
       }, 3000)
     }
   
@@ -162,6 +177,14 @@ class RecipeCard extends React.Component {
                      style={{fontSize: '2vh'}}
                      success
                      header='Your Meal Submission Was Successful!'
+                   />
+                  : 
+                  null}
+                       {this.state.showFavoritesMessage ?
+                     <Message
+                     style={{fontSize: '2vh'}}
+                     success
+                     header='Your Successfully Added This Meal To Your Favorites!'
                    />
                   : 
                   null}

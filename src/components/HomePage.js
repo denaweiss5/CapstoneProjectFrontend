@@ -22,6 +22,8 @@ class HomePage extends React.Component {
 
   };
 
+
+
   render() {
     let lastEntry;
     let mealName;

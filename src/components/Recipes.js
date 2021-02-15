@@ -58,6 +58,7 @@ console.log(recipeInfo)
 
 
   renderCard = (recipe) => {
+
     const { title, image, id } = recipe;
     return (
       <Card
