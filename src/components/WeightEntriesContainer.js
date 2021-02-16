@@ -184,7 +184,8 @@ const myEntry = this.props.weightEntries.map((entry) => {
 </table>
 </div>
 <div style={{ flex : 1, margin:'10vh', padding:'5px'}}>
-  <LineGraph />
+
+  <LineGraph weightEntries = {this.props.weightEntries}/>
   </div>
 </div>
 </div>

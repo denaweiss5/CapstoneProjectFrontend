@@ -1,6 +1,6 @@
-export const createEntry = (newEntry) => {
+export const createMealEntry = (newEntry) => {
     return {
-        type: 'CREATE_ENTRY',
+        type: 'CREATE_MEAL_ENTRY',
         entry: newEntry
     }
 }

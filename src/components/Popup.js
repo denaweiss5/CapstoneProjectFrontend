@@ -1,7 +1,7 @@
 import React from "react";
 import {  Button, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
-import {createEntry} from '../actions/mealEntries'
+import {createMealEntry} from '../actions/mealEntries'
 
 class Popup extends React.Component{
   constructor(props) {
@@ -68,7 +68,7 @@ class Popup extends React.Component{
             });
           } else {
             this.props.showMessage();
-            this.props.createEntry(newEntry);
+            this.props.createMealEntry(newEntry);
             this.props.closePopup()
           }
           this.setState({
@@ -162,7 +162,7 @@ class Popup extends React.Component{
 }
 
 const mapDispatchToProps = {
-  createEntry: createEntry
+  createMealEntry: createMealEntry
 };
 
 

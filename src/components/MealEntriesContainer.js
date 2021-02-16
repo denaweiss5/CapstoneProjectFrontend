@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 import MealEntry from "./MealEntry";
-import { createEntry, totalMealCals } from "../actions/mealEntries";
+import { createMealEntry, totalMealCals } from "../actions/mealEntries";
 import {specifiedMeals} from '../actions/specifiedMeals'
 import { Popup, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
@@ -82,7 +82,7 @@ class MealEntriesContainer extends React.Component {
         } else {
           this.toggleAddMeal();
           this.showMessage()
-          this.props.createEntry(newEntry);
+          this.props.createMealEntry(newEntry);
         }
         this.setState({
             name: '',
@@ -245,7 +245,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    createEntry: createEntry,
+    createMealEntry: createMealEntry,
     totalMealCals: totalMealCals,
     specifiedMeals: specifiedMeals
   };

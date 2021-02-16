@@ -6,6 +6,8 @@ import weightEntries from "../reducers/weightEntries";
 import mealCalories from "../reducers/mealCalories";
 import { randomRecipe, viewRecipe } from "../actions/recipes";
 
+
+
 class HomePage extends React.Component {
   renderTotal = () => {
     let total;
@@ -43,26 +45,26 @@ console.log(recipeInfo)
       });
   };
 
-  componentDidMount() {
+  // componentDidMount() {
   
-    // fetch(
-    //   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       "x-rapidapi-key":
-    //         "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-    //       "x-rapidapi-host":
-    //         "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-    //     },
-    //   }
-    // )
-    //   .then((resp) => resp.json())
-    //   .then((randomRecipeArr) => {
-    //     const recipeInfo = randomRecipeArr.recipes[0];
-    //     this.props.randomRecipe(recipeInfo);
-    //   });
-  }
+  //   fetch(
+  //     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "x-rapidapi-key":
+  //           'd6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98',
+  //         "x-rapidapi-host":
+  //           "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+  //       },
+  //     }
+  //   )
+  //     .then((resp) => resp.json())
+  //     .then((randomRecipeArr) => {
+  //       const recipeInfo = randomRecipeArr.recipes[0];
+  //       this.props.randomRecipe(recipeInfo);
+  //     });
+  // }
 
   render() {
     let lastEntry;
