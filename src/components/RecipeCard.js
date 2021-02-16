@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { nutritionRecipe, viewRecipe } from "../actions/recipes";
 import weightEntries from "../reducers/weightEntries";
 import {createEntry} from '../actions/favoriteRecipes'
-
+import SubstitutePopup from './SubstitutePopup'
 import Popup from "./Popup";
 
 
@@ -17,7 +17,8 @@ class RecipeCard extends React.Component {
             carbs: '',
             fat: '',
             protein: '',
-           showPopup: false,
+           showAddMealPopup: false,
+           showSubstitutePopup: false,
            showMessage: false,
            showFavoritesMessage: false
         }
@@ -81,11 +82,15 @@ e.preventDefault()
       });
   }
 
-     
+     toggleSubstitutePopup = () => {
+       this.setState({
+         showSubstitutePopup: !this.state.showSubstitutePopup
+       })
+     }
 
-    togglePopup = () => {
+    toggleAddMealPopup = () => {
       this.setState({
-        showPopup: !this.state.showPopup
+        showAddMealPopup: !this.state.showAddMealPopup
       })
     }
 
@@ -203,16 +208,22 @@ e.preventDefault()
                 }}
               />
               <div style={{marginRight:'22vh', justifyContent: 'center', height: '51vh'}}>
-              <Button style={{ color: 'purple', marginBottom: '2vh'}} onClick={this.togglePopup}>Add this recipe to your meal diary?</Button>
-              <Button icon='heart' onClick={this.favoriteRecipe}></Button>
-              {this.state.showPopup ? 
+              <Button style={{ color: 'rgb(158, 65, 161)', marginBottom: '1vh'}} onClick={this.toggleAddMealPopup}>Add this recipe to your meal diary?</Button>
+              <Button icon=' red heart' onClick={this.favoriteRecipe}></Button>
+              <p style={{marginBottom: '1.5vh'}}><Button style={{width: '100%', color: 'rgb(47, 47, 209)'}} onClick={this.toggleSubstitutePopup}>Substitute an Ingredient?</Button></p>
+              {this.state.showAddMealPopup ? 
               <Popup 
-              closePopup={this.togglePopup}
+              closePopup={this.toggleAddMealPopup}
               showMessage={this.showMessage}
                 />
                 :
                 null
             }
+            {this.state.showSubstitutePopup ? 
+            <SubstitutePopup closePopup = {this.toggleSubstitutePopup}/>
+            : 
+            null
+          }
               <div style={{ marginBottom:'1vh', padding: '1vh', justifyContent:'center', border: '1px dotted black',  textAlign:'center',  height:'22vh',  color: 'black', fontSize:'1.8vh'}}>
             <p>Ready In: {this.props.recipe.readyInMinutes} Min</p>
             <p>Servings: {this.props.recipe.servings}</p>
@@ -226,17 +237,18 @@ e.preventDefault()
               </div>
               <div >
               <Grid.Row>
-              <div style={{ padding: '1vh',   display:'inline', float: 'left', border: '1px dotted black',  textAlign:'center',  height:'21.8vh', width:'100%',  color: 'black', fontSize:'2vh'}}>
+              <div style={{ padding: '1vh',   display:'inline', float: 'left', border: '1px dotted black',  textAlign:'center',  height:'16vh', width:'100%',  color: 'black', fontSize:'2vh'}}>
                   <p style={{  fontSize:'2vh'}} >Nutrion Facts</p>
                   <p>{this.renderNutrition(this.props.recipe.id)}</p>
-                    <p style={{  fontSize:'1.8vh'}} >Calories: {this.state.calories}</p>
-                    <p style={{  fontSize:'1.8vh'}}>Carbs: {this.state.carbs}</p>
-                    <p style={{  fontSize:'1.8vh'}}>Fat: {this.state.fat}</p>
-                    <p style={{  fontSize:'1.8vh'}}>Protein: {this.state.protein}</p>
+                    <p style={{  fontSize:'1.8vh'}} >Calories: {this.state.calories}, 
+                Carbs: {this.state.carbs}</p>
+                    <p style={{  fontSize:'1.8vh'}}>Fat: {this.state.fat}, 
+                   Protein: {this.state.protein}</p>
                 </div>
                 
                 </Grid.Row>
               </div>
+              
               </div>
               </Grid.Row>
               </Grid>
@@ -249,6 +261,7 @@ e.preventDefault()
          <div style={{ display: 'flex',  justifyContent: 'center', height: '80vh', paddingTop:'5vh'}}>
                 <div style={{ textAlign: 'center', display: 'inline',  margin: '1vh',  width: '40%', overflowY: 'scroll', msOverflowStyle: 'hidden'}}>
                   <p style={{fontSize: '3vh'}}>Ingredients</p>
+                  
                   <p>
                     <ul style={{ textAlign: 'center', fontSize:'2.5vh', listStyleType: 'none'}}>
                       {this.props.recipe.extendedIngredients.map((ing) => {

@@ -22,30 +22,6 @@ const LineGraph = (props) => {
     });
   };
 
-  //     setChartData({
-  //       labels: userD,
-  //       datasets: [
-  //         {
-  //           label: "My Weight Journey",
-  //           data: userW,
-  //           fill: false,
-  //           borderColor: 'rgb(47, 47, 209)',
-  //           borderCapStyle: 'butt',
-  //           borderJoinStyle: 'miter',
-  //           pointBorderColor: 'black',
-  //           pointBackgroundColor: '#fff',
-  //           pointBorderWidth: 1,
-  //           pointHoverRadius: 3,
-  //           pointHoverBackgroundColor: 'purple',
-  //           pointHoverBorderColor: 'rgba(220,220,220,1)',
-  //           pointHoverBorderWidth: 2,
-  //           pointRadius: 0,
-  //           pointHitRadius: 10,
-  //           borderWidth: 4
-  //         }
-  //       ]
-  //     });
-  //   }
 
 
   useEffect(() => {
