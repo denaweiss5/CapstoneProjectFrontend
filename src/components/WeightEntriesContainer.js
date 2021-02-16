@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WeightEntry from "./WeightEntry";
 import { connect } from "react-redux";
 import { createEntry } from "../actions/weightEntries";
@@ -184,7 +184,7 @@ const myEntry = this.props.weightEntries.map((entry) => {
 </table>
 </div>
 <div style={{ flex : 1, margin:'10vh', padding:'5px'}}>
-  <LineGraph/>
+  <LineGraph />
   </div>
 </div>
 </div>

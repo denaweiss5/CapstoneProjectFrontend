@@ -65,6 +65,7 @@ class Diaries extends React.Component {
         }}
       >
         <Segment>
+        
           <Header as="h3">
             <Form>
               <Input
@@ -76,6 +77,8 @@ class Diaries extends React.Component {
             </Form>
           </Header>
           <Divider section />
+          <Header as="h3">Net Calories: {totalCals}</Header>
+          <Divider section />
 
           <Header as="h3">Meals</Header>
           <MealEntriesContainer date={this.state.date} />
@@ -85,7 +88,7 @@ class Diaries extends React.Component {
           <Header as="h3">Activities</Header>
           <ExerciseEntriesContainer date={this.state.date} />
           <Divider section />
-          <Header as="h3">Net Calories: {totalCals}</Header>
+         
         </Segment>
       </div>
     );

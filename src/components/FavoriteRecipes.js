@@ -37,16 +37,17 @@ class FavoriteRecipes extends React.Component {
 
     renderCard = (recipe) => {
 
-        const { name, id, image, calories, carbs, fat, protein} = recipe;
+        const { name, id, recipe_id, image, calories, carbs, fat, protein} = recipe;
         return (
           <Card
-            onClick={() => this.handleClick(id)}
+            onClick={() => this.handleClick(recipe_id)}
       
             style={{
               padding: "10px",
-              height: '65vh',
-              width: '22vw',
-              marginTop: "10vh"
+              height: '60vh',
+              marginTop: "10vh",
+              marginRight: '1vh',
+              marginLeft: '1vh'
             }}
           >
             <Image
@@ -59,7 +60,7 @@ class FavoriteRecipes extends React.Component {
               }}
             />
             <Card.Content>
-              <Card.Header style={{fontSize: '3vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{name}</Card.Header>
+              <Card.Header style={{fontSize: '2.5vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{name}</Card.Header>
             </Card.Content>
    
               <p style={{fontSize: '1.5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', color:'black'}}>Calories: {calories}</p>
@@ -71,7 +72,7 @@ class FavoriteRecipes extends React.Component {
               <p style={{fontSize: '1.5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', color:'black'}}>Fat: {fat}g</p>
 
    
-              <p style={{fontSize: '1.5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', color:'black'}}>Protein: {calories}g</p>
+              <p style={{fontSize: '1.5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', color:'black'}}>Protein: {protein}g</p>
    
             <Button style={{ backgroundColor: 'white'}} icon='trash' onClick={() => this.handleDelete(id)}></Button>
           </Card>
@@ -79,16 +80,32 @@ class FavoriteRecipes extends React.Component {
       };
 
 
-  handleClick = (id) => {
-      console.log(id)
-  };
+  handleClick = (recipe_id) => {
+    fetch(
+        `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-key":
+              "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+            "x-rapidapi-host":
+              "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          },
+        }
+      )
+        .then((resp) => resp.json())
+        .then((recipeInfo) => {
+          this.props.viewRecipe(recipeInfo);
+          this.props.history.push(`/show_recipes/${recipe_id}`);
+        });
+    };
 
     render(){
 
         return(
             <div>
                 <Grid >
-            <Grid.Row >
+            <Grid.Row style={{width: '100%', margin: '5vh', justifyContent: 'center'}}>
               
               {this.props.favoriteRecipe.length > 0 ?
               this.props.favoriteRecipe.map((recipe) => {

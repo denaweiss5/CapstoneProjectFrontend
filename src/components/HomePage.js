@@ -43,25 +43,26 @@ console.log(recipeInfo)
       });
   };
 
-  // componentDidMount() {
-  //   fetch(
-  //     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "x-rapidapi-key":
-  //           "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-  //         "x-rapidapi-host":
-  //           "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-  //       },
-  //     }
-  //   )
-  //     .then((resp) => resp.json())
-  //     .then((randomRecipeArr) => {
-  //       const recipeInfo = randomRecipeArr.recipes[0];
-  //       this.props.randomRecipe(recipeInfo);
-  //     });
-  // }
+  componentDidMount() {
+  
+    // fetch(
+    //   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       "x-rapidapi-key":
+    //         "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+    //       "x-rapidapi-host":
+    //         "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    //     },
+    //   }
+    // )
+    //   .then((resp) => resp.json())
+    //   .then((randomRecipeArr) => {
+    //     const recipeInfo = randomRecipeArr.recipes[0];
+    //     this.props.randomRecipe(recipeInfo);
+    //   });
+  }
 
   render() {
     let lastEntry;
@@ -99,7 +100,9 @@ console.log(recipeInfo)
     } else {
       exerciseCals = 0;
     }
-    console.log(this.props.randomRecipeInfo);
+
+
+  
 
     return (
       <div class="row" style={{ display: "flex" }}>
@@ -160,8 +163,8 @@ console.log(recipeInfo)
           </Link>
           <br></br>
           <p style={{ fontSize: "20px" }}>Suggested Recipe</p>
-
-          <Card         onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
+{this.props.randomRecipeInfo ? 
+          <Card  onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
  style={{padding:'10px', marginLeft: "50px" }}>
             <Image
               src={this.props.randomRecipeInfo.image}
@@ -184,6 +187,8 @@ console.log(recipeInfo)
               </Card.Header>
             </Card.Content>
           </Card>
+          : 
+          null}
         </div>
       </div>
     );

@@ -24,14 +24,13 @@ class RecipeCard extends React.Component {
     }
 
     favoriteRecipe = (e) => {
-    e.preventDefault()
+e.preventDefault()
 
     const name = this.props.recipe.title
     const image = this.props.recipe.image
     const ingredients = this.props.recipe.extendedIngredients.map(ing => {
       return ing.original
     })
-    const recipe_id = parseInt(this.props.recipe.id)
     const directions = this.props.recipe.analyzedInstructions[0] ? 
      this.props.recipe.analyzedInstructions[0].steps.map(step => {
        return step.steps
@@ -50,7 +49,7 @@ class RecipeCard extends React.Component {
         image: image,
         ingredients: ingredients,
         directions: directions,
-        recipe_id: recipe_id,
+        recipe_id: this.props.match.params.id,
         fat: fat,
         carbs: carbs,
         protein: protein,
@@ -62,6 +61,7 @@ class RecipeCard extends React.Component {
       .then((resp) => resp.json())
       .then((newEntry) => {
         if (newEntry.error) {
+          console.log(newEntry.error)
           this.setState({
             error: newEntry.error,
           });
@@ -184,7 +184,7 @@ class RecipeCard extends React.Component {
                      <Message
                      style={{fontSize: '2vh'}}
                      success
-                     header='Your Successfully Added This Meal To Your Favorites!'
+                     header='You Successfully Added This Meal To Your Favorites!'
                    />
                   : 
                   null}

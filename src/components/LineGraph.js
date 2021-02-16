@@ -30,7 +30,6 @@ const LineGraph = (props) => {
               label: "My Weight Journey",
               data: userW,
               fill: false,
-              lineTension: 0.1,
               borderColor: 'rgb(47, 47, 209)',
               borderCapStyle: 'butt',
               borderJoinStyle: 'miter',
@@ -71,8 +70,8 @@ const LineGraph = (props) => {
                           },
                           ticks: {
                               autoSkip: true,
-                              maxTicksLimit: 10,
-                              beginAtZero: true
+                              maxTicksLimit: 20,
+                              beginAtZero: false
                           },
                           gridLines: {
                               display: false
