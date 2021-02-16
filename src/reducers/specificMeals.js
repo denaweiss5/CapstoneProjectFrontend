@@ -1,10 +1,10 @@
 const specificMeals = (state = [], action) => {
-switch(action.type){
-case 'SPECIFIED_MEAL':
-  return action.entries
+  switch (action.type) {
+    case "SPECIFIED_MEAL":
+      return action.entries;
     default:
-        return state;
-}
-}
+      return state;
+  }
+};
 
 export default specificMeals;

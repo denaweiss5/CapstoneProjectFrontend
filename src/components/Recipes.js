@@ -1,8 +1,6 @@
 import React from "react";
-import { Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { Card, Icon, Image } from "semantic-ui-react";
-import RecipeCard from "./RecipeCard";
+import { Card, Button, Grid, Image } from "semantic-ui-react";
 import { findRecipes, viewRecipe } from "../actions/recipes";
 
 class Recipes extends React.Component {
@@ -10,29 +8,33 @@ class Recipes extends React.Component {
     super();
 
     this.state = {
-      intervalId: 0
+      intervalId: 0,
     };
   }
 
-  componentDidMount(){
-
-    const query = this.props.match.params.category
-      if(this.props.recipes.length === 0){
-        fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=25&query=${query}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-                "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-            }
-        })
-        .then(resp => resp.json())
-        .then(recipesArr => {
-            const recipes = recipesArr.results.map(recipe => {
-                return recipe
-            })
-            this.props.findRecipes(recipes)
-        })
-      }
+  componentDidMount() {
+    const query = this.props.match.params.category;
+    if (this.props.recipes.length === 0) {
+      fetch(
+        `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=25&query=${query}`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-key":
+              "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+            "x-rapidapi-host":
+              "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          },
+        }
+      )
+        .then((resp) => resp.json())
+        .then((recipesArr) => {
+          const recipes = recipesArr.results.map((recipe) => {
+            return recipe;
+          });
+          this.props.findRecipes(recipes);
+        });
+    }
   }
 
   handleClick = (id) => {
@@ -55,19 +57,16 @@ class Recipes extends React.Component {
       });
   };
 
-
   renderCard = (recipe) => {
-
     const { title, image, id } = recipe;
     return (
       <Card
         onClick={() => this.handleClick(id)}
-  
         style={{
           padding: "10px",
-          height: '50vh',
-          width: '20vw',
-          margin: "1vh"
+          height: "50vh",
+          width: "20vw",
+          margin: "1vh",
         }}
       >
         <Image
@@ -80,7 +79,15 @@ class Recipes extends React.Component {
           }}
         />
         <Card.Content>
-          <Card.Header style={{fontSize: '3vh', fontFamily: 'sans-serif', fontWeight: 'lighter'}}>{title}</Card.Header>
+          <Card.Header
+            style={{
+              fontSize: "3vh",
+              fontFamily: "sans-serif",
+              fontWeight: "lighter",
+            }}
+          >
+            {title}
+          </Card.Header>
         </Card.Content>
       </Card>
     );
@@ -104,10 +111,14 @@ class Recipes extends React.Component {
   render() {
     return (
       <div>
-      
-      <Button
-          onClick={() => this.props.history.push('/recipes')}
-          style={{marginTop: '12vh', marginBottom: '0px', marginLeft: '3vh', float:'left'}}
+        <Button
+          onClick={() => this.props.history.push("/recipes")}
+          style={{
+            marginTop: "12vh",
+            marginBottom: "0px",
+            marginLeft: "3vh",
+            float: "left",
+          }}
         >
           Back To All Categories
         </Button>
@@ -116,40 +127,37 @@ class Recipes extends React.Component {
         <br></br>
         <div
           style={{
-            paddingLeft: '9%',
-            paddingTop: "100px"
+            paddingLeft: "9%",
+            paddingTop: "100px",
           }}
         >
-      
-          <Grid >
-            <Grid.Row >
-              
-              {this.props.recipes.length > 0 ?
-              this.props.recipes.map((recipe) => {
-                return this.renderCard(recipe);
-              })
-              :
-              <p>No Recipes Found. Please Consider Searching For New Ones</p>
-            }
+          <Grid>
+            <Grid.Row>
+              {this.props.recipes.length > 0 ? (
+                this.props.recipes.map((recipe) => {
+                  return this.renderCard(recipe);
+                })
+              ) : (
+                <p>No Recipes Found. Please Consider Searching For New Ones</p>
+              )}
             </Grid.Row>
           </Grid>
-          {this.props.recipes.length > 0 ?
-          <Button
-            style={{
-              float: "right",
-              marginBottom: "15px",
-              marginRight: "15px",
-              padding: "15px",
-            }}
-            icon="angle double up"
-            title="Back to top"
-            className="scroll"
-            onClick={() => {
-              this.scrollToTop();
-            }}
-          ></Button>
-    :
-    null}
+          {this.props.recipes.length > 0 ? (
+            <Button
+              style={{
+                float: "right",
+                marginBottom: "15px",
+                marginRight: "15px",
+                padding: "15px",
+              }}
+              icon="angle double up"
+              title="Back to top"
+              className="scroll"
+              onClick={() => {
+                this.scrollToTop();
+              }}
+            ></Button>
+          ) : null}
         </div>
       </div>
     );
@@ -164,7 +172,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   viewRecipe: viewRecipe,
-  findRecipes: findRecipes
+  findRecipes: findRecipes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

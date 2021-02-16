@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import { createEntry } from "../actions/weightEntries";
 import { Button, Form, Input, Message } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import LineGraph from './LineGraph'
-
-
-
-
+import LineGraph from "./LineGraph";
 
 class WeightEntriesContainer extends React.Component {
   constructor() {
@@ -25,12 +21,12 @@ class WeightEntriesContainer extends React.Component {
 
   showMessage = () => {
     this.setState({
-      showMessage: true
-    })
-    setTimeout(()=> {
-      this.setState({ showMessage: false})
-    }, 3000)
-  }
+      showMessage: true,
+    });
+    setTimeout(() => {
+      this.setState({ showMessage: false });
+    }, 3000);
+  };
 
   toggleAddWeight = () => {
     this.setState({
@@ -92,47 +88,56 @@ class WeightEntriesContainer extends React.Component {
       return (total = 0);
     }
   };
-  
-
-
-
-
 
   render() {
-
-const myEntry = this.props.weightEntries.map((entry) => {
-          return <WeightEntry entry={entry} key={entry.id} />;
-        })
+    const myEntry = this.props.weightEntries.map((entry) => {
+      return <WeightEntry entry={entry} key={entry.id} />;
+    });
     return (
-        
-<div style={{ marginTop:'12vh', width: '100%'}}>
-  <p>My Weight Journey</p>
-  <p>
-  Total Weight Lost: {this.renderTotal()} lbs
-  </p>
-<div style={{height: '100%', width: '100%', fontFamily: 'sans-serif', display: 'flex', marginTop: '5vh', bottom: 0}}>
+      <div style={{ marginTop: "12vh", width: "100%" }}>
+        <p>My Weight Journey</p>
+        <p>Total Weight Lost: {this.renderTotal()} lbs</p>
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            fontFamily: "sans-serif",
+            display: "flex",
+            marginTop: "5vh",
+            bottom: 0,
+          }}
+        >
+          <div style={{ flex: 1, margin: "10px" }}>
+            {this.state.showMessage ? (
+              <Message
+                style={{ fontSize: "2vh" }}
+                success
+                header="Your Weight Submission Was Successful!"
+              />
+            ) : null}
 
-
-  <div style={{flex : 1, margin: '10px'}}>
-
-  {this.state.showMessage ?
-                     <Message
-                     style={{fontSize: '2vh'}}
-                     success
-                     header='Your Weight Submission Was Successful!'
-                   />
-                  : 
-                  null}
- 
-      <table class="ui celled table" style={{marginBottom:'5vh', fontFamily: 'sans-serif', fontWeight: 'lighter', width: '100%', float:'left'}}>
-  <thead>
-  <tr>
-    <th style={{fontWeight: 'lighter', fontSize: '3vh'}}>Date</th>
-    <th style={{fontWeight: 'lighter', fontSize: '3vh'}}>Weight</th>
-  </tr>
-  </thead>
-{myEntry}
-<tr >
+            <table
+              class="ui celled table"
+              style={{
+                marginBottom: "5vh",
+                fontFamily: "sans-serif",
+                fontWeight: "lighter",
+                width: "100%",
+                float: "left",
+              }}
+            >
+              <thead>
+                <tr>
+                  <th style={{ fontWeight: "lighter", fontSize: "3vh" }}>
+                    Date
+                  </th>
+                  <th style={{ fontWeight: "lighter", fontSize: "3vh" }}>
+                    Weight
+                  </th>
+                </tr>
+              </thead>
+              {myEntry}
+              <tr>
                 {this.state.addWeight ? (
                   <Button
                     onClick={() => this.toggleAddWeight()}
@@ -143,13 +148,13 @@ const myEntry = this.props.weightEntries.map((entry) => {
                   </Button>
                 ) : (
                   <td>
-                    <Form style={{width: '250px'}}>
+                    <Form style={{ width: "250px" }}>
                       <Input
                         type="date"
                         name="date"
                         value={this.state.date}
                         onChange={this.handleChange}
-                        style={{ display: 'inline'}}
+                        style={{ display: "inline" }}
                       ></Input>
                       <Input
                         type="number"
@@ -157,7 +162,7 @@ const myEntry = this.props.weightEntries.map((entry) => {
                         value={this.state.weight}
                         onChange={this.handleChange}
                         placeholder="weight"
-                        style={{ display: 'inline'}}
+                        style={{ display: "inline" }}
                       ></Input>
                       <Button
                         type="button"
@@ -178,17 +183,14 @@ const myEntry = this.props.weightEntries.map((entry) => {
                     </Form>
                   </td>
                 )}
-
               </tr>
-
-</table>
-</div>
-<div style={{ flex : 1, margin:'10vh', padding:'5px'}}>
-
-  <LineGraph weightEntries = {this.props.weightEntries}/>
-  </div>
-</div>
-</div>
+            </table>
+          </div>
+          <div style={{ flex: 1, margin: "10vh", padding: "5px" }}>
+            <LineGraph weightEntries={this.props.weightEntries} />
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -201,7 +203,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  createEntry: createEntry
+  createEntry: createEntry,
 };
 
 export default connect(

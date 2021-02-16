@@ -182,3 +182,31 @@ position: fixed;
   margin: auto;  
   background-color: rgba(0, 0, 0, 0.877);   
 }
+
+.diaries_div{
+
+    font-family: sans-serif;
+    position: sticky;
+    margin-top: 15vh,
+
+}
+.error {
+  color: red;
+}
+
+
+
+.favorite_recipe_p {
+  font-size: 1.5vh;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: black
+}
+
+.homepage_title {
+  font-size: 20px;
+}
+
+.homepage_info {
+  font-size: 27px;
+}

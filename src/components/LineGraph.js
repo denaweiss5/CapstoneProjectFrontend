@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { connect } from "react-redux";
-
-
 
 const LineGraph = (props) => {
   const [chartData, setChartData] = useState({});
@@ -10,11 +7,11 @@ const LineGraph = (props) => {
   let userW;
   let userD;
   const chart = () => {
-     userW = props.weightEntries.map((entry) => {
+    userW = props.weightEntries.map((entry) => {
       console.log(entry);
       return parseInt(entry.weight);
     });
-     userD = props.weightEntries.map((entry) => {
+    userD = props.weightEntries.map((entry) => {
       const year = entry.date.replace("-", "").replace("-", "").slice(0, 4);
       const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
       const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
@@ -22,10 +19,8 @@ const LineGraph = (props) => {
     });
   };
 
-
-
   useEffect(() => {
-    chart()
+    chart();
     setChartData({
       labels: userD,
       datasets: [
@@ -49,8 +44,6 @@ const LineGraph = (props) => {
         },
       ],
     });
-
-    ;
   }, []);
 
   return (
@@ -93,4 +86,4 @@ const LineGraph = (props) => {
   );
 };
 
-export default LineGraph
+export default LineGraph;
