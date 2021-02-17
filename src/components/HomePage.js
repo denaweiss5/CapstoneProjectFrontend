@@ -2,8 +2,6 @@ import React from "react";
 import { Button, Card, Grid, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import weightEntries from "../reducers/weightEntries";
-import mealCalories from "../reducers/mealCalories";
 import { randomRecipe, viewRecipe } from "../actions/recipes";
 
 class HomePage extends React.Component {
@@ -37,31 +35,30 @@ class HomePage extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipeInfo) => {
-console.log(recipeInfo)
+        console.log(recipeInfo);
         this.props.viewRecipe(recipeInfo);
         this.props.history.push(`/show_recipes/${id}`);
       });
   };
 
   componentDidMount() {
-  
-    // fetch(
-    //   "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       "x-rapidapi-key":
-    //         "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-    //       "x-rapidapi-host":
-    //         "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-    //     },
-    //   }
-    // )
-    //   .then((resp) => resp.json())
-    //   .then((randomRecipeArr) => {
-    //     const recipeInfo = randomRecipeArr.recipes[0];
-    //     this.props.randomRecipe(recipeInfo);
-    //   });
+    fetch(
+      "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1",
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+          "x-rapidapi-host":
+            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        },
+      }
+    )
+      .then((resp) => resp.json())
+      .then((randomRecipeArr) => {
+        const recipeInfo = randomRecipeArr.recipes[0];
+        this.props.randomRecipe(recipeInfo);
+      });
   }
 
   render() {
@@ -101,9 +98,6 @@ console.log(recipeInfo)
       exerciseCals = 0;
     }
 
-
-  
-
     return (
       <div class="row" style={{ display: "flex" }}>
         <div className="col1">
@@ -119,11 +113,11 @@ console.log(recipeInfo)
             </Button>
           </Link>
           <br></br>
-          <p style={{ fontSize: "20px" }}>My Total Weight Lost</p>
-          <p style={{ fontSize: "27px" }}>{this.renderTotal()} lbs</p>
+          <p className="homepage_title">My Total Weight Lost</p>
+          <p className="homepage_info">{this.renderTotal()} lbs</p>
           <i style={{ marginBottom: ".5em" }} class=" huge weight icon"></i>
-          <p style={{ fontSize: "20px" }}>My Current Weight</p>
-          <p style={{ fontSize: "27px" }}>{lastEntry} lbs</p>
+          <p className="homepage_title">My Current Weight</p>
+          <p className="homepage_info">{lastEntry} lbs</p>
         </div>
         <div className="col2">
           <Link to="/myDiaries">
@@ -138,14 +132,20 @@ console.log(recipeInfo)
             </Button>
           </Link>
           <br></br>
-          <p style={{ fontSize: "20px" }}>My Last Meal</p>
-          <p style={{ fontSize: "27px" }}>
-            {mealName}: {mealCals} calories
+          <p className="homepage_title">My Last Meal</p>
+          <p className="homepage_info">
+            {mealName}: 
+            </p>
+            <p className="homepage_info">
+            {mealCals} calories
           </p>
           <i style={{ margin: ".5em" }} class=" big utensils icon"></i>
-          <p style={{ fontSize: "20px" }}>My Last Activity</p>
-          <p style={{ fontSize: "27px" }}>
-            {exerciseName}: {exerciseCals} calories burned
+          <p className="homepage_title">My Last Activity</p>
+          <p className="homepage_info">
+            {exerciseName}: 
+            </p>
+            <p className="homepage_info">
+            {exerciseCals} calories burned
           </p>
           <i style={{ margin: ".5em" }} class=" big bicycle icon"></i>
         </div>
@@ -158,37 +158,38 @@ console.log(recipeInfo)
                 color: "rgb(47, 47, 209)",
               }}
             >
-              See All Recipes
+              Find A Recipe
             </Button>
           </Link>
           <br></br>
-          <p style={{ fontSize: "20px" }}>Suggested Recipe</p>
-{this.props.randomRecipeInfo ? 
-          <Card  onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
- style={{padding:'10px', marginLeft: "50px" }}>
-            <Image
-              src={this.props.randomRecipeInfo.image}
-              wrapped
-              ui={false}
-              style={{
-                height: "auto",
-                width: "auto",
-              }}
-            />
-            <Card.Content>
-              <Card.Header
+          <p className="homepage_title">Suggested Recipe</p>
+          {this.props.randomRecipeInfo ? (
+            <Card
+              onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
+              style={{ padding: "10px", marginLeft: "50px" }}
+            >
+              <Image
+                src={this.props.randomRecipeInfo.image}
+                wrapped
+                ui={false}
                 style={{
-                  fontSize: "3vh",
-                  fontFamily: "sans-serif",
-                  fontWeight: "lighter",
+                  height: "auto",
+                  width: "auto",
                 }}
-              >
-                {this.props.randomRecipeInfo.title}
-              </Card.Header>
-            </Card.Content>
-          </Card>
-          : 
-          null}
+              />
+              <Card.Content>
+                <Card.Header
+                  style={{
+                    fontSize: "3vh",
+                    fontFamily: "sans-serif",
+                    fontWeight: "lighter",
+                  }}
+                >
+                  {this.props.randomRecipeInfo.title}
+                </Card.Header>
+              </Card.Content>
+            </Card>
+          ) : null}
         </div>
       </div>
     );
@@ -207,6 +208,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   randomRecipe: randomRecipe,
-  viewRecipe: viewRecipe
+  viewRecipe: viewRecipe,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

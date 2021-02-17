@@ -1,30 +1,25 @@
 import React from "react";
-import { Table, Button, Form, Input } from "semantic-ui-react";
+import { Table, Button, Form, Input, Popup, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import MealEntry from "./MealEntry";
-import { createEntry, totalMealCals } from "../actions/mealEntries";
-import {specifiedMeals} from '../actions/specifiedMeals'
-import { Popup, Message } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-
-
+import { createMealEntry } from "../actions/mealEntries";
+import { specifiedMeals } from "../actions/specifiedMeals";
+import { Link } from "react-router-dom";
 
 class MealEntriesContainer extends React.Component {
-  
   constructor() {
-    
     super();
 
     this.state = {
-      name: '',
-      fat: '',
-      carbs: '',
-      protein: '',
-      calories: '',
-      date: '',
+      name: "",
+      fat: "",
+      carbs: "",
+      protein: "",
+      calories: "",
+      date: "",
       addMeal: true,
       showMessage: false,
-      error: ''
+      error: "",
     };
   }
 
@@ -42,21 +37,23 @@ class MealEntriesContainer extends React.Component {
 
   showMessage = () => {
     this.setState({
-      showMessage: true
-    })
-    setTimeout(()=> {
-      this.setState({ showMessage: false})
-    }, 3000)
-  }
+      showMessage: true,
+    });
+    setTimeout(() => {
+      this.setState({ showMessage: false });
+    }, 3000);
+  };
 
   handleSubmit = (e) => {
-  e.preventDefault()
+    e.preventDefault();
     const name = this.state.name;
     const fat = this.state.fat;
     const carbs = this.state.carbs;
     const protein = this.state.protein;
     const calories = this.state.calories;
-    const updatedDate = parseInt(this.state.date.replace("-", "").replace("-", ""));
+    const updatedDate = parseInt(
+      this.state.date.replace("-", "").replace("-", "")
+    );
     const reqObj = {
       method: "POST",
       headers: {
@@ -69,7 +66,7 @@ class MealEntriesContainer extends React.Component {
         protein: protein,
         calories: calories,
         user_id: this.props.currentUser.id,
-        date: updatedDate
+        date: updatedDate,
       }),
     };
     fetch("http://localhost:3000/meal_entries", reqObj)
@@ -81,59 +78,61 @@ class MealEntriesContainer extends React.Component {
           });
         } else {
           this.toggleAddMeal();
-          this.showMessage()
-          this.props.createEntry(newEntry);
+          this.showMessage();
+          this.props.createMealEntry(newEntry);
         }
         this.setState({
-            name: '',
-            fat: '',
-            carbs: '',
-            protein: '',
-            calories: '',
-            date: ''
-        })
+          name: "",
+          fat: "",
+          carbs: "",
+          protein: "",
+          calories: "",
+          date: "",
+        });
       });
   };
 
   renderTotal = () => {
     let total;
-    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
-    const entries = this.props.mealEntries.filter(entry => entry.date === date)
+    let date = parseInt(this.props.date.replace("-", "").replace("-", ""));
+    const entries = this.props.mealEntries.filter(
+      (entry) => entry.date === date
+    );
     let calories = entries.map((entry) => {
-      return entry.calories
+      return entry.calories;
     });
-    const updatedCalories = (calories.map(entry => {
-      if(entry===undefined){
-          return 0
+    const updatedCalories = calories.map((entry) => {
+      if (entry === undefined) {
+        return 0;
       } else {
-          return entry
+        return entry;
       }
-  }))
-  if (updatedCalories.length > 0) {
-    const mealCals = updatedCalories.reduce((a, b) => a + b, 0).toFixed(2)
-    this.props.totalMealCals(mealCals)
-    return mealCals
-  } else {
-    return (total = 0);
-  }
-  }
+    });
+    if (updatedCalories.length > 0) {
+      const mealCals = updatedCalories.reduce((a, b) => a + b, 0).toFixed(2);
+      return mealCals;
+    } else {
+      return (total = 0);
+    }
+  };
 
   render() {
-
-    let date = parseInt(this.props.date.replace('-', '').replace('-', ''))
-const entries = this.props.mealEntries.filter(entry => entry.date === date)
-this.props.specifiedMeals(entries)
-const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
+    let date = parseInt(this.props.date.replace("-", "").replace("-", ""));
+    const entries = this.props.mealEntries.filter(
+      (entry) => entry.date === date
+    );
+    this.props.specifiedMeals(entries);
+    const myEntry = entries.map((entry) => (
+      <MealEntry entry={entry} key={entry.id} />
+    ));
     return (
       <div>
-                  { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-                  {this.state.showMessage ?
-                     <Message
-                     success
-                     header='Your Meal Submission Was Successful!'
-                   />
-                  : 
-                  null}
+        {this.state.error ? (
+          <h4 className="error">{this.state.error}</h4>
+        ) : null}
+        {this.state.showMessage ? (
+          <Message success header="Your Meal Submission Was Successful!" />
+        ) : null}
         <Table>
           <Table.Header>
             <Table.Row>
@@ -145,7 +144,7 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
             </Table.Row>
           </Table.Header>
           {myEntry}
-          <Table.Row >
+          <Table.Row>
             <Table.Cell>Total Calories Burned</Table.Cell>
             <Table.Cell></Table.Cell>
             <Table.Cell></Table.Cell>
@@ -153,22 +152,29 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
             <Table.Cell>{this.renderTotal()} </Table.Cell>
           </Table.Row>
         </Table>
-      
-        {this.state.addMeal ? 
-        <Popup flowing hoverable trigger={
+
+        {this.state.addMeal ? (
+          <Popup
+            flowing
+            hoverable
+            trigger={
               <Button
-              style={{ marginLeft: "25px" }}
-              onClick={this.toggleAddMeal}
-            >
-              Add
-            </Button>
-            } >
-              <p>You can easily add a meal to your diary from our recipes <Link to='/recipes'>here</Link>!</p>
-            </Popup>
-            :
-            <Form>
+                style={{ marginLeft: "25px" }}
+                onClick={this.toggleAddMeal}
+              >
+                Add
+              </Button>
+            }
+          >
+            <p>
+              You can easily add a meal to your diary from our recipes{" "}
+              <Link to="/recipes">here</Link>!
+            </p>
+          </Popup>
+        ) : (
+          <Form>
             <Input
-             style={{display: 'block'}}
+              style={{ display: "block" }}
               type="text"
               name="name"
               value={this.state.name}
@@ -176,7 +182,7 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
               placeholder="Meal Name"
             ></Input>
             <Input
-             style={{display: 'block'}}
+              style={{ display: "block" }}
               type="number"
               name="fat"
               value={this.state.fat}
@@ -184,31 +190,31 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
               placeholder="fat"
             ></Input>
             <Input
-             style={{display: 'block'}}
+              style={{ display: "block" }}
               type="number"
               name="carbs"
               value={this.state.carbs}
               onChange={this.handleChange}
               placeholder="carbs"
             ></Input>
-             <Input
-              style={{display: 'block'}}
+            <Input
+              style={{ display: "block" }}
               type="number"
               name="protein"
               value={this.state.protein}
               onChange={this.handleChange}
               placeholder="protein"
             ></Input>
-             <Input
-              style={{display: 'block'}}
+            <Input
+              style={{ display: "block" }}
               type="number"
               name="calories"
               value={this.state.calories}
               onChange={this.handleChange}
               placeholder="calories"
             ></Input>
-              <Input
-              style={{display: 'block'}}
+            <Input
+              style={{ display: "block" }}
               type="date"
               name="date"
               value={this.state.date}
@@ -230,8 +236,7 @@ const myEntry = entries.map(entry => <MealEntry entry={entry} key={entry.id} />)
               Cancel
             </Button>
           </Form>
-        
-    }
+        )}
       </div>
     );
   }
@@ -245,9 +250,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    createEntry: createEntry,
-    totalMealCals: totalMealCals,
-    specifiedMeals: specifiedMeals
-  };
+  createMealEntry: createMealEntry,
+  specifiedMeals: specifiedMeals,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MealEntriesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MealEntriesContainer);
