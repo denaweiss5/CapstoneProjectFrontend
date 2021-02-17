@@ -75,7 +75,7 @@ class AccountInfo extends React.Component {
           <Form.Field>
             <label>Password confirmation</label>
             <Input
-            type='password'
+              type="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}

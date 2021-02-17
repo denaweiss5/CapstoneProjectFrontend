@@ -88,77 +88,76 @@ class Popup extends React.Component {
         <div className="popup\_inner">
           <Form style={{ marginTop: "4vh" }}>
             <Form.Field>
-          <label >Recipe:</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              placeholder="Meal Name"
-            ></Input>
-    
-    </Form.Field>
-    <Form.Field>
-            <label >Fat(g):</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="number"
-              name="fat"
-              value={this.state.fat}
-              onChange={this.handleChange}
-              placeholder="fat"
-            ></Input>
+              <label>Recipe:</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+                placeholder="Meal Name"
+              ></Input>
             </Form.Field>
             <Form.Field>
-         <label >Carbs(g):</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="number"
-              name="carbs"
-              value={this.state.carbs}
-              onChange={this.handleChange}
-              placeholder="carbs"
-            ></Input>
+              <label>Fat(g):</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="number"
+                name="fat"
+                value={this.state.fat}
+                onChange={this.handleChange}
+                placeholder="fat"
+              ></Input>
             </Form.Field>
             <Form.Field>
-            <label >Protein(g):</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="number"
-              name="protein"
-              value={this.state.protein}
-              onChange={this.handleChange}
-              placeholder="protein"
-            ></Input>
+              <label>Carbs(g):</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="number"
+                name="carbs"
+                value={this.state.carbs}
+                onChange={this.handleChange}
+                placeholder="carbs"
+              ></Input>
             </Form.Field>
             <Form.Field>
-            <label >Calories:</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="number"
-              name="calories"
-              value={this.state.calories}
-              onChange={this.handleChange}
-              placeholder="calories"
-            ></Input>
+              <label>Protein(g):</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="number"
+                name="protein"
+                value={this.state.protein}
+                onChange={this.handleChange}
+                placeholder="protein"
+              ></Input>
             </Form.Field>
             <Form.Field>
-            <label >Meal Date:</label>
-            <Input
-              style={{ display: "block", width: "75%", marginLeft: "12%" }}
-              type="date"
-              name="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-              placeholder="date"
-            ></Input>
+              <label>Calories:</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="number"
+                name="calories"
+                value={this.state.calories}
+                onChange={this.handleChange}
+                placeholder="calories"
+              ></Input>
+            </Form.Field>
+            <Form.Field>
+              <label>Meal Date:</label>
+              <Input
+                style={{ display: "block", width: "75%", marginLeft: "12%" }}
+                type="date"
+                name="date"
+                value={this.state.date}
+                onChange={this.handleChange}
+                placeholder="date"
+              ></Input>
             </Form.Field>
             <Button
               type="button"
               onClick={this.handleSubmit}
               className="ui blue button"
-              style={{marginTop: '1vh'}}
+              style={{ marginTop: "1vh" }}
             >
               Add To Diary
             </Button>

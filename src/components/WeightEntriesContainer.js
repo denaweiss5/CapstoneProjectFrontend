@@ -7,7 +7,6 @@ import "semantic-ui-css/semantic.min.css";
 import LineGraph from "./LineGraph";
 
 class WeightEntriesContainer extends React.Component {
- 
   constructor() {
     super();
 
@@ -18,12 +17,11 @@ class WeightEntriesContainer extends React.Component {
       showMessage: false,
       error: "",
       userW: [],
-      userD: []
+      userD: [],
     };
   }
 
-  componentDidMount(){
-
+  componentDidMount() {
     let userW = this.props.weightEntries.map((entry) => {
       return parseInt(entry.weight);
     });
@@ -35,16 +33,16 @@ class WeightEntriesContainer extends React.Component {
     });
     this.setState({
       userD: userD,
-      userW: userW
-    })
+      userW: userW,
+    });
   }
 
   renderNewDate = (entry) => {
     const year = entry.date.replace("-", "").replace("-", "").slice(0, 4);
-      const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
-      const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
-      return `${month}/${day}/${year}`;
-  }
+    const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
+    const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
+    return `${month}/${day}/${year}`;
+  };
   showMessage = () => {
     this.setState({
       showMessage: true,
@@ -97,7 +95,7 @@ class WeightEntriesContainer extends React.Component {
             date: "",
             error: "",
             userD: [...this.state.userD, this.renderNewDate(newEntry)],
-            userW: [...this.state.userW, parseInt(newEntry.weight)]
+            userW: [...this.state.userW, parseInt(newEntry.weight)],
           });
         }
       });
@@ -150,24 +148,23 @@ class WeightEntriesContainer extends React.Component {
                 marginBottom: "5vh",
                 fontFamily: "sans-serif",
                 fontWeight: "lighter",
-                width: '60%',
-                marginLeft: '10vh'
+                width: "60%",
+                marginLeft: "10vh",
               }}
             >
               <thead>
-                <tr >
-                  <th style={{ fontWeight: "lighter", fontSize: "3vh"}}>
+                <tr>
+                  <th style={{ fontWeight: "lighter", fontSize: "3vh" }}>
                     Date
                   </th>
-                  <th style={{ fontWeight: "lighter", fontSize: "3vh",}}>
+                  <th style={{ fontWeight: "lighter", fontSize: "3vh" }}>
                     Weight
                   </th>
                 </tr>
               </thead>
               {myEntry}
-             <tr style={{width:'100%', float: 'right'}} >
+              <tr style={{ width: "100%", float: "right" }}>
                 {this.state.addWeight ? (
-                
                   <Button
                     onClick={() => this.toggleAddWeight()}
                     className="ui button"
@@ -175,35 +172,34 @@ class WeightEntriesContainer extends React.Component {
                   >
                     Add weight
                   </Button>
-                
                 ) : (
-                
-                  <td >
-                    <Form style={{width: '250px'}}>
-                     
+                  <td>
+                    <Form style={{ width: "250px" }}>
                       <Input
-                    
                         type="date"
                         name="date"
                         value={this.state.date}
                         onChange={this.handleChange}
-                        style={{display: 'inline'}}
+                        style={{ display: "inline" }}
                       ></Input>
                       <Input
-                      
                         type="number"
                         name="weight"
                         value={this.state.weight}
                         onChange={this.handleChange}
                         placeholder="weight"
-                        style={{display: 'inline'}}
+                        style={{ display: "inline" }}
                       ></Input>
-                
+
                       <Button
                         type="button"
                         onClick={this.handleSubmit}
                         className="ui blue button"
-                        style={{ float: "left", marginTop: '1vh', marginLeft: '4vh'}}
+                        style={{
+                          float: "left",
+                          marginTop: "1vh",
+                          marginLeft: "4vh",
+                        }}
                       >
                         Submit
                       </Button>
@@ -211,13 +207,16 @@ class WeightEntriesContainer extends React.Component {
                         type="button"
                         onClick={this.toggleAddWeight}
                         className="ui button"
-                        style={{ float: "right", marginTop: '1vh', marginRight: '4vh' }}
+                        style={{
+                          float: "right",
+                          marginTop: "1vh",
+                          marginRight: "4vh",
+                        }}
                       >
                         Cancel
                       </Button>
                     </Form>
                   </td>
-                 
                 )}
               </tr>
             </table>
