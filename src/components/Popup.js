@@ -86,7 +86,9 @@ class Popup extends React.Component {
     return (
       <div className="popup">
         <div className="popup\_inner">
-          <Form style={{ marginTop: "8vh" }}>
+          <Form style={{ marginTop: "4vh" }}>
+            <Form.Field>
+          <label >Recipe:</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="text"
@@ -95,6 +97,10 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="Meal Name"
             ></Input>
+    
+    </Form.Field>
+    <Form.Field>
+            <label >Fat(g):</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="number"
@@ -103,6 +109,9 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="fat"
             ></Input>
+            </Form.Field>
+            <Form.Field>
+         <label >Carbs(g):</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="number"
@@ -111,6 +120,9 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="carbs"
             ></Input>
+            </Form.Field>
+            <Form.Field>
+            <label >Protein(g):</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="number"
@@ -119,6 +131,9 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="protein"
             ></Input>
+            </Form.Field>
+            <Form.Field>
+            <label >Calories:</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="number"
@@ -127,6 +142,9 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="calories"
             ></Input>
+            </Form.Field>
+            <Form.Field>
+            <label >Meal Date:</label>
             <Input
               style={{ display: "block", width: "75%", marginLeft: "12%" }}
               type="date"
@@ -135,12 +153,14 @@ class Popup extends React.Component {
               onChange={this.handleChange}
               placeholder="date"
             ></Input>
+            </Form.Field>
             <Button
               type="button"
               onClick={this.handleSubmit}
               className="ui blue button"
+              style={{marginTop: '1vh'}}
             >
-              Submit
+              Add To Diary
             </Button>
             <Button
               type="button"

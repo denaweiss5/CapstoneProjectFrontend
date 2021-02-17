@@ -72,7 +72,7 @@ class SubstitutePopup extends React.Component {
               {this.state.substitutes.map((sub) => {
                 return (
                   <li
-                    style={{ color: "white", margin: "3vh", fontSize: "2vh" }}
+                    style={{ color: "black", margin: "3vh", fontSize: "2vh" }}
                   >
                     {sub}
                   </li>
@@ -80,7 +80,7 @@ class SubstitutePopup extends React.Component {
               })}
             </ul>
           ) : (
-            <p style={{ color: "white", margin: "3vh", fontSize: "2vh" }}>
+            <p style={{ color: "black", margin: "3vh", fontSize: "2vh" }}>
               Sorry, we currently do not have any substitutes for that
               ingredient.
             </p>

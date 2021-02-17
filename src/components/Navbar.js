@@ -21,7 +21,7 @@ class Navbar extends React.Component {
             <Menu borderless fluid fixed="top" size="huge">
               <Container>
                 <Link to="/home">
-                  <Menu.Item style={{ marginTop: "10px" }} active as="a">
+                  <Menu.Item style={{ marginTop: "10px" }} as="a">
                     Home
                   </Menu.Item>
                 </Link>

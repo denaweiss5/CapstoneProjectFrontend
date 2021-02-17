@@ -134,12 +134,18 @@ class HomePage extends React.Component {
           <br></br>
           <p className="homepage_title">My Last Meal</p>
           <p className="homepage_info">
-            {mealName}: {mealCals} calories
+            {mealName}: 
+            </p>
+            <p className="homepage_info">
+            {mealCals} calories
           </p>
           <i style={{ margin: ".5em" }} class=" big utensils icon"></i>
           <p className="homepage_title">My Last Activity</p>
           <p className="homepage_info">
-            {exerciseName}: {exerciseCals} calories burned
+            {exerciseName}: 
+            </p>
+            <p className="homepage_info">
+            {exerciseCals} calories burned
           </p>
           <i style={{ margin: ".5em" }} class=" big bicycle icon"></i>
         </div>
@@ -152,7 +158,7 @@ class HomePage extends React.Component {
                 color: "rgb(47, 47, 209)",
               }}
             >
-              See All Recipes
+              Find A Recipe
             </Button>
           </Link>
           <br></br>

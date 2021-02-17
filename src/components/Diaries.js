@@ -57,7 +57,11 @@ class Diaries extends React.Component {
     const totalCals = (totalMealCals - totalExerciseCals).toFixed(1);
 
     return (
-      <div className="diaries_div">
+      <div style={{
+        fontFamily: 'sans-serif',
+        position: 'sticky',
+        marginTop: '15vh',
+      }}>
         <Segment>
           <Header as="h3">
             <Form>

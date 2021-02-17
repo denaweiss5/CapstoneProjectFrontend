@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Image, Message } from "semantic-ui-react";
+import { Button, Grid, Icon, Image, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { nutritionRecipe, viewRecipe } from "../actions/recipes";
 import { createEntry } from "../actions/favoriteRecipes";
@@ -24,7 +24,7 @@ class RecipeCard extends React.Component {
 
   favoriteRecipe = (e) => {
     e.preventDefault();
-
+console.log(e.target)
     const name = this.props.recipe.title;
     const image = this.props.recipe.image;
     const ingredients = this.props.recipe.extendedIngredients.map((ing) => {
@@ -221,6 +221,7 @@ class RecipeCard extends React.Component {
                       >
                         <Button
                           style={{
+                            width:'100%',
                             color: "rgb(158, 65, 161)",
                             marginBottom: "1vh",
                           }}
@@ -228,17 +229,14 @@ class RecipeCard extends React.Component {
                         >
                           Add this recipe to your meal diary?
                         </Button>
-                        <Button
-                          icon=" red heart"
-                          onClick={this.favoriteRecipe}
-                        ></Button>
+                        <br></br>
+                        <Button animated onClick={this.favoriteRecipe} style={{width: '100%', color: 'red'}}>
+                          <Button.Content visible>Add To Favorites</Button.Content>
+                          <Button.Content hidden><Icon name='red heart'/></Button.Content>
+                        
+                        </Button>
                         <p style={{ marginBottom: "1.5vh" }}>
-                          <Button
-                            style={{ width: "100%", color: "rgb(47, 47, 209)" }}
-                            onClick={this.toggleSubstitutePopup}
-                          >
-                            Substitute an Ingredient?
-                          </Button>
+                        
                         </p>
                         {this.state.showAddMealPopup ? (
                           <Popup
@@ -264,20 +262,54 @@ class RecipeCard extends React.Component {
                           }}
                         >
                           <p>
-                            Ready In: {this.props.recipe.readyInMinutes} Min
+                            Total Cook and Prep Time: {this.props.recipe.readyInMinutes} Min
                           </p>
                           <p>Servings: {this.props.recipe.servings}</p>
-                          <p>Health Score: {this.props.recipe.healthScore}</p>
+                          <p>Health Score: {this.props.recipe.healthScore}/100</p>
                           <p>
                             Weight Watcher Smart Points:{" "}
                             {this.props.recipe.weightWatcherSmartPoints}
                           </p>
-
+                          
+                          
+                          
+<ul style={{listStyleType: "none",fontSize: '1.2vh', justifyContent: 'center'}}>
                           {this.props.recipe.diets.map((diet) => {
+                            if(diet === 'gluten free'){
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'20px', float: 'left', display: 'block', margin:'1px'}}>GF</li>
+                              )
+                            } else if(diet === 'dairy free') {
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'20px', float: 'left', display: 'block', margin:'1px'}}>DF</li>
+                              )
+                            } else if (diet === 'vegan'){
+                              return (
+                              <li style={{border: '1px solid black', borderRadius: '25px', width:'20px', float: 'left', display: 'block', margin:'1px'}}>V</li>
+                              )
+                            } else if (diet === 'lacto ovo vegetarian'){
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'20px', float: 'left', display: 'block', margin:'1px'}}>VG</li>
+                              )
+                            } else if (diet === 'primal'){
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'35px', float: 'left', display: 'block', margin:'1px'}}>Primal</li>
+                              )
+                            } else if (diet === 'paleolithic'){
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'35px', float: 'left', display: 'block', margin:'1px'}}>Paleo</li>
+                              )
+                            } else if (diet === 'pescatarian'){
+                              return (
+                                <li style={{border: '1px solid black', borderRadius: '25px', width:'35px', float: 'left', display: 'block', margin:'1px'}}>PESC</li>
+                              )
+                            }  else {
                             return (
-                              <p style={{ display: "inline" }}>{diet}. </p>
+                              <li style={{ border: '1px solid black', borderRadius: '25px', width:'35px', float: 'left', display: 'block', margin:'1px'}}>{diet}. </li>
                             );
+                            }
                           })}
+                          </ul>
                         </div>
                         <div>
                           <Grid.Row>
@@ -294,16 +326,18 @@ class RecipeCard extends React.Component {
                                 fontSize: "2vh",
                               }}
                             >
-                              <p style={{ fontSize: "2vh" }}>Nutrion Facts</p>
+                              <p style={{ fontSize: "2vh" }}>Nutrition Facts</p>
                               <p>
                                 {this.renderNutrition(this.props.recipe.id)}
                               </p>
-                              <p style={{ fontSize: "1.8vh" }}>
-                                Calories: {this.state.calories}, Carbs:{" "}
+                              <p style={{ fontSize: "1.6vh" }}>
+                                Calories: {this.state.calories}
+                                <br></br>
+                                Carbs:{" "}
                                 {this.state.carbs}
-                              </p>
-                              <p style={{ fontSize: "1.8vh" }}>
-                                Fat: {this.state.fat}, Protein:{" "}
+                           <br></br>
+                                Fat: {this.state.fat}
+                                <br></br>Protein:{" "}
                                 {this.state.protein}
                               </p>
                             </div>
@@ -334,8 +368,14 @@ class RecipeCard extends React.Component {
                           msOverflowStyle: "hidden",
                         }}
                       >
+                    
                         <p style={{ fontSize: "3vh" }}>Ingredients</p>
-
+                        <Button
+                            style={{ width: "50%", color: "rgb(47, 47, 209)" }}
+                            onClick={this.toggleSubstitutePopup}
+                          >
+                            Need to Substitute an Ingredient?
+                          </Button>
                         <p>
                           <ul
                             style={{

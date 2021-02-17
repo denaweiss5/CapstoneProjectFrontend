@@ -138,7 +138,7 @@ class Recipes extends React.Component {
                   return this.renderCard(recipe);
                 })
               ) : (
-                <p>No Recipes Found. Please Consider Searching For New Ones</p>
+                <p>No Recipes Found.</p>
               )}
             </Grid.Row>
           </Grid>

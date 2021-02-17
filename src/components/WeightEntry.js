@@ -26,13 +26,13 @@ class WeightEntry extends React.Component {
       <tbody>
         <tr>
           <td
-            style={{ fontWeight: "lighter", fontSize: "2.5vh" }}
+            style={{ fontWeight: "lighter", fontSize: "2.5vh"}}
             data-label="date"
           >
             {updatedDate}
           </td>
           <td
-            style={{ fontWeight: "lighter", fontSize: "2.5vh" }}
+            style={{ fontWeight: "lighter", fontSize: "2.5vh"}}
             data-label="Age"
           >
             {weight} lbs

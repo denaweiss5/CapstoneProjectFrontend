@@ -2,31 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
 const LineGraph = (props) => {
-  const [chartData, setChartData] = useState({});
+//   const [chartData, setChartData] = useState({});
 
-  let userW;
-  let userD;
-  const chart = () => {
-    userW = props.weightEntries.map((entry) => {
-      console.log(entry);
-      return parseInt(entry.weight);
-    });
-    userD = props.weightEntries.map((entry) => {
-      const year = entry.date.replace("-", "").replace("-", "").slice(0, 4);
-      const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
-      const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
-      return `${month}/${day}/${year}`;
-    });
-  };
+//   let userW;
+//   let userD;
+//   const chart = () => {
+//     userW = props.weightEntries.map((entry) => {
+//       console.log(entry);
+//       return parseInt(entry.weight);
+//     });
+//     userD = props.weightEntries.map((entry) => {
+//       const year = entry.date.replace("-", "").replace("-", "").slice(0, 4);
+//       const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
+//       const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
+//       return `${month}/${day}/${year}`;
+//     });
+//   };
 
-  useEffect(() => {
-    chart();
-    setChartData({
-      labels: userD,
+//   useEffect(() => {
+//     chart();
+
+    const chartData = {
+      labels: props.userD,
       datasets: [
         {
           label: "My Weight Journey",
-          data: userW,
+          data: props.userW,
           fill: false,
           borderColor: "rgb(47, 47, 209)",
           borderCapStyle: "butt",
@@ -43,12 +44,13 @@ const LineGraph = (props) => {
           borderWidth: 4,
         },
       ],
-    });
-  }, []);
+    };
+
+//   }, []);
 
   return (
     <div className="App">
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100%", height: "100%", }}>
         <Line
           data={chartData}
           options={{
