@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const query = this.state.keyword;
-    console.log(query)
+
     fetch(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?limitLicense=true&offset=0&number=36&query=${query}`,
       {
@@ -38,7 +38,6 @@ class SearchBar extends React.Component {
     )
       .then((resp) => resp.json())
       .then((recipesArr) => {
-        console.log(recipesArr)
         const recipes = recipesArr.results.map((recipe) => {
           return recipe;
         });
@@ -49,7 +48,6 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    
     return (
       <div className="SB">
         {this.props.currentUser ? (

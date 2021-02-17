@@ -6,12 +6,12 @@ const mealEntries = (state = [], action) => {
     case "CURRENT_USER":
     case "CREATE_USER":
       return action.user.meal_entries;
-    case "CREATE_ENTRY":
+    case "CREATE_MEAL_ENTRY":
       updatedMealEntries = [...state, action.entry];
       return updatedMealEntries;
-      case 'DELETE_ENTRY':
-        updatedMealEntries = state.filter(entry => entry.id !== action.id)
-        return updatedMealEntries
+    case "DELETE_ENTRY":
+      updatedMealEntries = state.filter((entry) => entry.id !== action.id);
+      return updatedMealEntries;
     default:
       return state;
   }
