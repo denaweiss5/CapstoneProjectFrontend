@@ -166,7 +166,7 @@ class HomePage extends React.Component {
           {this.props.randomRecipeInfo ? (
             <Card
               onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
-              style={{ padding: "10px", marginLeft: "50px" }}
+              style={{ padding: "10px", marginLeft: "4vh" }}
             >
               <Image
                 src={this.props.randomRecipeInfo.image}

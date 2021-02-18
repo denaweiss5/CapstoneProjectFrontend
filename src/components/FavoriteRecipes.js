@@ -43,7 +43,7 @@ class FavoriteRecipes extends React.Component {
     } = recipe;
     return (
       <Card
-        onClick={() => this.handleClick(recipe_id)}
+        
         style={{
           padding: "10px",
           height: "60vh",
@@ -53,6 +53,7 @@ class FavoriteRecipes extends React.Component {
         }}
       >
         <Image
+        onClick={() => this.handleClick(recipe_id)}
           src={image}
           wrapped
           ui={false}

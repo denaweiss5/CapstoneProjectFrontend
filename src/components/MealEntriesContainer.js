@@ -145,7 +145,7 @@ class MealEntriesContainer extends React.Component {
           </Table.Header>
           {myEntry}
           <Table.Row>
-            <Table.Cell>Total Calories Burned</Table.Cell>
+            <Table.Cell>Total Calories</Table.Cell>
             <Table.Cell></Table.Cell>
             <Table.Cell></Table.Cell>
             <Table.Cell></Table.Cell>
