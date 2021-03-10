@@ -26,10 +26,8 @@ class HomePage extends React.Component {
       {
         method: "GET",
         headers: {
-          "x-rapidapi-key":
-            "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-          "x-rapidapi-host":
-            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          "x-rapidapi-key": "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+          "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         },
       }
     )
@@ -139,7 +137,7 @@ class HomePage extends React.Component {
             <p className="homepage_info">
             {mealCals} calories
           </p>
-          <i style={{ margin: ".5em" }} class=" big utensils icon"></i>
+          <i style={{ margin: ".1em" }} class=" big utensils icon"></i>
           <p className="homepage_title">My Last Activity</p>
           <p className="homepage_info">
             {exerciseName}: 
@@ -147,7 +145,7 @@ class HomePage extends React.Component {
             <p className="homepage_info">
             {exerciseCals} calories burned
           </p>
-          <i style={{ margin: ".5em" }} class=" big bicycle icon"></i>
+          <i style={{ margin: ".1em" }} class=" big bicycle icon"></i>
         </div>
         <div className="col3" style={{ textAlign: "center" }}>
           <Link to="/recipes">
@@ -166,7 +164,7 @@ class HomePage extends React.Component {
           {this.props.randomRecipeInfo ? (
             <Card
               onClick={() => this.handleClick(this.props.randomRecipeInfo.id)}
-              style={{ padding: "10px", marginLeft: "4vh" }}
+              style={{ padding: "10px", marginLeft: "7vh" }}
             >
               <Image
                 src={this.props.randomRecipeInfo.image}

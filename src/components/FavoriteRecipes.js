@@ -97,10 +97,8 @@ class FavoriteRecipes extends React.Component {
       {
         method: "GET",
         headers: {
-          "x-rapidapi-key":
-            "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
-          "x-rapidapi-host":
-            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          "x-rapidapi-key": "d6d30feb34msh027ba22c7ad5d85p111652jsn5e503987bf98",
+          "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         },
       }
     )

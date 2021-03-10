@@ -2,25 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
 const LineGraph = (props) => {
-//   const [chartData, setChartData] = useState({});
 
-//   let userW;
-//   let userD;
-//   const chart = () => {
-//     userW = props.weightEntries.map((entry) => {
-//       console.log(entry);
-//       return parseInt(entry.weight);
-//     });
-//     userD = props.weightEntries.map((entry) => {
-//       const year = entry.date.replace("-", "").replace("-", "").slice(0, 4);
-//       const month = entry.date.replace("-", "").replace("-", "").slice(4, 6);
-//       const day = entry.date.replace("-", "").replace("-", "").slice(6, 8);
-//       return `${month}/${day}/${year}`;
-//     });
-//   };
-
-//   useEffect(() => {
-//     chart();
 
     const chartData = {
       labels: props.userD,
@@ -46,7 +28,7 @@ const LineGraph = (props) => {
       ],
     };
 
-//   }, []);
+
 
   return (
     <div className="App">
